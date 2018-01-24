@@ -1,10 +1,8 @@
 package com.jarchie.yue.ui.activity;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-
 import com.jarchie.common.base.BaseActivity;
 import com.jarchie.yue.R;
 import com.jarchie.yue.ui.fragment.GirlFragment;
@@ -16,7 +14,6 @@ import com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView;
 import com.luseen.luseenbottomnavigation.BottomNavigation.OnBottomNavigationItemClickListener;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Jarchie on 2018\1\24.
@@ -34,9 +31,7 @@ public class MainActivity extends BaseActivity implements OnBottomNavigationItem
     }
 
     @Override
-    public void initPresenter() {
-
-    }
+    public void initPresenter() {}
 
     @Override
     public void initListener() {
@@ -143,10 +138,4 @@ public class MainActivity extends BaseActivity implements OnBottomNavigationItem
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
