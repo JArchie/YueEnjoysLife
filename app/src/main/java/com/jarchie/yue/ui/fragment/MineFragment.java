@@ -5,14 +5,14 @@ import com.jarchie.yue.R;
 
 /**
  * Created by Jarchie on 2018\1\24.
- * 新闻Fragment
+ * 我的Fragment
  */
 
-public class NewsFragment extends BaseFragment {
+public class MineFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_news_layout;
+        return R.layout.fragment_mine_layout;
     }
 
     @Override

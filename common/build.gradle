@@ -29,6 +29,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //Android Support Library
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile 'com.android.support:design:26.0.0-alpha1'
+    //Butter Knife
+    compile 'com.jakewharton:butterknife:7.0.1'
+    //添加沉浸式模式的依赖(https://github.com/gyf-dev/ImmersionBar)
+    compile 'com.gyf.barlibrary:barlibrary:2.3.0'
     //添加RxJava2依赖
     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -38,5 +43,15 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-
+    //EventBus依赖
+    compile 'org.greenrobot:eventbus:3.1.1'
+    //SmartRefreshLayout依赖
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    //智能自定义Toast
+    compile('com.github.the-pig-of-jungle:SmartShow:v1.0.3') {
+        //去除design包的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中所用相同
+        exclude group: 'com.android.support'
+    }
+    //自定义BottomNavigationView
+    compile 'com.github.armcha:LuseenBottomNavigation:1.8.2'
 }
