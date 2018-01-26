@@ -3,9 +3,14 @@ package com.jarchie.yue.ui.fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.jarchie.common.base.BaseFragment;
 import com.jarchie.common.widget.LoadingTip;
 import com.jarchie.common.widget.RefreshInitView;
@@ -16,6 +21,7 @@ import com.jarchie.yue.mvp.contract.GirlContract;
 import com.jarchie.yue.mvp.model.GirlModel;
 import com.jarchie.yue.mvp.presenter.GirlPresenter;
 import com.jarchie.yue.ui.adapter.GirlAdapter;
+import com.jarchie.yue.ui.widget.CommonDialog;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -44,6 +50,9 @@ public class GirlFragment extends BaseFragment<GirlPresenter, GirlModel> impleme
     private List<GirlBean.ResultsBean> mList = new ArrayList<>();
     private GirlAdapter mAdapter;
     private int pageNum = 1;
+    //弹出框
+    private CommonDialog mCommonDialog;
+    private PhotoView mPhotoView;
 
     @Override
     public int getLayoutId() {
@@ -72,11 +81,20 @@ public class GirlFragment extends BaseFragment<GirlPresenter, GirlModel> impleme
         mGirlRecycle.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new GirlAdapter(getContext(), mList);
         mGirlRecycle.setAdapter(mAdapter);
+        mCommonDialog = new CommonDialog(getContext(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,R.layout.dialog_girl, Gravity.CENTER);
+        mPhotoView = mCommonDialog.findViewById(R.id.dialog_photo);
     }
 
     @Override
     public void returnGirlData(GirlBean girlBean) { //数据返回到View层
         mList.addAll(girlBean.getResults());
+        mAdapter.setOnItemClickListener(new GirlAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                mCommonDialog.show();
+                Glide.with(getContext()).load(mList.get(position).getUrl()).into(mPhotoView);
+            }
+        });
     }
 
     @Override

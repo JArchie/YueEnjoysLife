@@ -30,14 +30,31 @@ public class GirlAdapter extends RecyclerView.Adapter<GirlAdapter.ViewHolder> {
         this.mList = list;
     }
 
+    //事件回调的监听
+    private OnItemClickListener onItemClickListener;
+
+    //设置回调监听
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_girl_layout, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mGirlImage.loadImage(mList.get(position).getUrl(), R.color.placeholder_color);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener!=null){
+                    int pos = holder.getLayoutPosition();
+                    onItemClickListener.onItemClick(pos);
+                }
+            }
+        });
     }
 
     @Override
@@ -53,6 +70,10 @@ public class GirlAdapter extends RecyclerView.Adapter<GirlAdapter.ViewHolder> {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
 
 }
