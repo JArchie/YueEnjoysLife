@@ -62,7 +62,7 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
         }
         ButterKnife.unbind(this);
         if (mPresenter != null) {
-            mPresenter.onDestroy();
+            mPresenter.onDetach();
             mPresenter = null;
         }
         if (!isConfigChange) {

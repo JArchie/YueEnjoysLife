@@ -1,4 +1,4 @@
-package com.jarchie.common.network;
+package com.jarchie.yue.api;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -22,7 +22,7 @@ class RetrofitManage {
     private volatile static Retrofit mRetrofit = null;
     private Retrofit.Builder mRetrofitBuilder = new Retrofit.Builder();
 
-    RetrofitManage(int hostType){
+    protected RetrofitManage(int hostType){
         OkHttpClient.Builder mClientBuilder = new OkHttpClient.Builder();
         mRetrofitBuilder
                 .baseUrl(Constant.getHost(hostType))
@@ -31,7 +31,7 @@ class RetrofitManage {
                 .client(mClientBuilder.addInterceptor(getLoggerInterceptor()).build());
     }
 
-    Retrofit getRetrofit(){
+    protected Retrofit getRetrofit(){
         if (mRetrofit == null){
             synchronized (RetrofitManage.class){
                 if (mRetrofit == null){

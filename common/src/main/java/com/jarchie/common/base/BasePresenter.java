@@ -20,7 +20,7 @@ public abstract class BasePresenter<V, M> {
 
     public void onStart() {}
 
-    public void onDestroy() {
+    public void onDetach() {
         this.mView = null;
     }
 

@@ -4,9 +4,11 @@
     <color name="colorPrimaryDark">#5FAEE3</color>
     <color name="colorAccent">#f5554f</color>
     <!--自定义颜色-->
+    <color name="placeholder_color">#1A000000</color>
     <color name="color_main">#5EAFE2</color>
     <color name="color_50">#505050</color>
     <color name="color_fff">#FFFFFF</color>
+    <color name="color_f0">#F0F0F0</color>
     <color name="color_000">#000000</color>
     <color name="color_333">#333333</color>
     <color name="color_666">#666666</color>

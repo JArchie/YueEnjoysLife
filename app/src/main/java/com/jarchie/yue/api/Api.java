@@ -1,4 +1,4 @@
-package com.jarchie.common.network;
+package com.jarchie.yue.api;
 
 /**
  * Created by Jarchie on 2018\1\24.
@@ -8,12 +8,12 @@ package com.jarchie.common.network;
 public class Api extends RetrofitManage {
     private static Api api;
 
-    public Api(int hostType) {
+    protected Api(int hostType) {
         super(hostType);
-        api = new Api(hostType);
     }
 
-    public static ApiService getInstance(){
+    public static ApiService getInstance(int hostType){
+        api = new Api(hostType);
         return api.getRetrofit().create(ApiService.class);
     }
 
