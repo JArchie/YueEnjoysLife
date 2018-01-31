@@ -33,4 +33,15 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+
+    <style name="AppTheme.Notitle" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+    <!--全屏-->
+    <style name="AppTheme.Notitle.FullScreen" parent="AppTheme.Notitle">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
 </resources>

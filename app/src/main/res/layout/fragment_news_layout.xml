@@ -14,7 +14,7 @@
             style="@style/AppTheme.Toolbar"
             app:layout_scrollFlags="scroll|enterAlways|snap"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="@string/tab_news" />
+            app:title="@string/news_title" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/mTabLayout"
@@ -23,6 +23,7 @@
             android:background="@color/color_main"
             app:tabGravity="fill"
             app:tabIndicatorColor="@color/color_fff"
+            app:tabIndicatorHeight="3dp"
             app:tabMaxWidth="0dp"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/color_fff"

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
         holder.tvTextTitle.setText(mList.get(position).getTitle() == null ? "暂无数据" : mList.get(position).getTitle()); //标题
         holder.tvTextTime.setText(mList.get(position).getTime()); //时间
         holder.tvTextContent.setText(Html.fromHtml(mList.get(position).getContent())); //内容
-        holder.tvTextSrc.setText(mList.get(position).getSrc()); //来源
+        holder.tvTextSrc.setText(TextUtils.isEmpty(mList.get(position).getSrc()) ? "暂无来源" : mList.get(position).getSrc()); //来源
         holder.ivTextPhoto.loadImage(mList.get(position).getPic(), R.color.placeholder_color);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
