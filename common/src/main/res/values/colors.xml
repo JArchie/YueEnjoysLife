@@ -12,6 +12,7 @@
     <color name="color_000">#000000</color>
     <color name="color_333">#333333</color>
     <color name="color_666">#666666</color>
+    <color name="color_777">#777777</color>
     <color name="color_999">#999999</color>
     <color name="toast_stroke_gray">#99d4d4d4</color>
 </resources>

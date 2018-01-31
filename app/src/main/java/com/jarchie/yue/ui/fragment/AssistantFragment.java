@@ -12,10 +12,10 @@ import butterknife.Bind;
 
 /**
  * Created by Jarchie on 2018\1\24.
- * 视频Fragment
+ * 我的Fragment
  */
 
-public class VideoFragment extends BaseFragment {
+public class AssistantFragment extends BaseFragment {
 
     @Bind(R.id.topbar_back)
     ImageView mTopbarBack;
@@ -24,7 +24,7 @@ public class VideoFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_video_layout;
+        return R.layout.fragment_assistant_layout;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class VideoFragment extends BaseFragment {
     @Override
     public void initData() {
         mTopbarBack.setVisibility(View.GONE);
-        mTopbarTitle.setText("视频");
+        mTopbarTitle.setText("助手");
     }
 
     @Override

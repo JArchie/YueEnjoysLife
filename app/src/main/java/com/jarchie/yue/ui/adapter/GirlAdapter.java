@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.jarchie.common.glide.GlideImageView;
 import com.jarchie.yue.R;
-import com.jarchie.yue.bean.GirlBean;
+import com.jarchie.yue.mvp.model.GirlBean;
 
 import java.util.List;
 

@@ -1,27 +1,15 @@
 package com.jarchie.common.base;
 
-import android.content.Context;
-
 /**
  * Created by Jarchie on 2018\1\24.
  * 封装Presenter的基类
  */
 
-public abstract class BasePresenter<V, M> {
-    public Context mContext;
-    public M mModel;
-    public V mView;
+public  interface BasePresenter{
+    //默认初始化
+    void start();
 
-    public void setVM(V v, M m) {
-        this.mView = v;
-        this.mModel = m;
-        this.onStart();
-    }
-
-    public void onStart() {}
-
-    public void onDetach() {
-        this.mView = null;
-    }
+    //Activity关闭时把View对象置为空
+    void detach();
 
 }

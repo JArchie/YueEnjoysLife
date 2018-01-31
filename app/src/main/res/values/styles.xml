@@ -9,4 +9,28 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!--Toolbar的样式-->
+    <style name="AppTheme.Toolbar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <!--新闻频道样式-->
+    <style name="news_list_card_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <!--TabLayout的标题栏文字样式-->
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="news_channel_name">
+        <item>头条</item>
+        <item>新闻</item>
+        <item>财经</item>
+        <item>体育</item>
+        <item>娱乐</item>
+        <item>教育</item>
+        <item>科技</item>
+        <item>健康</item>
+    </string-array>
+</resources>

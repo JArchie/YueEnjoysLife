@@ -30,10 +30,10 @@ dependencies {
     //Android Support Library
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
+    compile 'com.android.support:cardview-v7:26.0.0-alpha1'
     //Butter Knife
     compile 'com.jakewharton:butterknife:7.0.1'
-    //添加沉浸式模式的依赖(https://github.com/gyf-dev/ImmersionBar)
-    compile 'com.gyf.barlibrary:barlibrary:2.3.0'
     //添加RxJava2依赖
     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'

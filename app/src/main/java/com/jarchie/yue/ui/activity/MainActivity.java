@@ -4,9 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import com.jarchie.common.base.BaseActivity;
+import com.jarchie.common.base.BasePresenter;
 import com.jarchie.yue.R;
 import com.jarchie.yue.ui.fragment.GirlFragment;
-import com.jarchie.yue.ui.fragment.MineFragment;
+import com.jarchie.yue.ui.fragment.AssistantFragment;
 import com.jarchie.yue.ui.fragment.NewsFragment;
 import com.jarchie.yue.ui.fragment.VideoFragment;
 import com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationItem;
@@ -23,15 +24,12 @@ public class MainActivity extends BaseActivity implements OnBottomNavigationItem
 
     @Bind(R.id.navigation_view)
     BottomNavigationView mNavigationView;
-    private Fragment newsFragment, girlFragment, videoFragment, mineFragment;
+    private Fragment newsFragment, girlFragment, videoFragment, assistantFragment;
 
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
     }
-
-    @Override
-    public void initPresenter() {}
 
     @Override
     public void initListener() {
@@ -74,7 +72,7 @@ public class MainActivity extends BaseActivity implements OnBottomNavigationItem
         BottomNavigationItem newsItem = new BottomNavigationItem(getString(R.string.tab_news), ContextCompat.getColor(this, R.color.color_main), R.drawable.tab_news);
         BottomNavigationItem girlItem = new BottomNavigationItem(getString(R.string.tab_girl), ContextCompat.getColor(this, R.color.color_main), R.drawable.tab_girl);
         BottomNavigationItem videoItem = new BottomNavigationItem(getString(R.string.tab_video), ContextCompat.getColor(this, R.color.color_main), R.drawable.tab_video);
-        BottomNavigationItem mineItem = new BottomNavigationItem(getString(R.string.tab_mine), ContextCompat.getColor(this, R.color.color_main), R.drawable.tab_mine);
+        BottomNavigationItem mineItem = new BottomNavigationItem(getString(R.string.tab_assistant), ContextCompat.getColor(this, R.color.color_main), R.drawable.tab_assistant);
         mNavigationView.addTab(newsItem);
         mNavigationView.addTab(girlItem);
         mNavigationView.addTab(videoItem);
@@ -110,12 +108,12 @@ public class MainActivity extends BaseActivity implements OnBottomNavigationItem
                     transaction.show(videoFragment);
                 }
                 break;
-            case 3: //我的模块
-                if (mineFragment == null) {
-                    mineFragment = new MineFragment();
-                    transaction.add(R.id.id_content, mineFragment);
+            case 3: //助手模块
+                if (assistantFragment == null) {
+                    assistantFragment = new AssistantFragment();
+                    transaction.add(R.id.id_content, assistantFragment);
                 } else {
-                    transaction.show(mineFragment);
+                    transaction.show(assistantFragment);
                 }
                 break;
         }
@@ -133,9 +131,29 @@ public class MainActivity extends BaseActivity implements OnBottomNavigationItem
         if (videoFragment != null) {
             transaction.hide(videoFragment);
         }
-        if (mineFragment != null) {
-            transaction.hide(mineFragment);
+        if (assistantFragment != null) {
+            transaction.hide(assistantFragment);
         }
     }
 
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void showLoading(String title) {
+
+    }
+
+    @Override
+    public void stopLoading() {
+
+    }
+
+    @Override
+    public void showErrorTip(String msg) {
+
+    }
 }

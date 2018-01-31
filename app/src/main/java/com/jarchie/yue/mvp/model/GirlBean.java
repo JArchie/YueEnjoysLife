@@ -1,4 +1,4 @@
-package com.jarchie.yue.bean;
+package com.jarchie.yue.mvp.model;
 
 import java.util.List;
 

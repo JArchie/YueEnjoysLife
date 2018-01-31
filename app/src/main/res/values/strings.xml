@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">悦享生活</string>
-    <string name="tab_news">新闻</string>
+    <string name="tab_news">新闻频道</string>
     <string name="tab_girl">妹子</string>
     <string name="tab_video">视频</string>
-    <string name="tab_mine">我的</string>
+    <string name="tab_assistant">助手</string>
     <string name="top_title">标题</string>
 </resources>

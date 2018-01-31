@@ -1,12 +1,9 @@
 package com.jarchie.yue.mvp.contract;
 
-import com.jarchie.common.base.BaseModel;
+import android.content.Context;
 import com.jarchie.common.base.BasePresenter;
 import com.jarchie.common.base.BaseView;
-import com.jarchie.yue.bean.GirlBean;
-
-import retrofit2.Call;
-import retrofit2.Callback;
+import com.jarchie.yue.mvp.model.GirlBean;
 
 /**
  * Created by Jarchie on 2018\1\25.
@@ -15,16 +12,12 @@ import retrofit2.Callback;
 
 public interface GirlContract {
 
-    interface Model extends BaseModel { //请求数据
-        Call<GirlBean> requestGirlData(int pageSize, int pageNum);
-    }
-
     interface View extends BaseView { //将数据返回到View
-        void returnGirlData(GirlBean girlBean);
+        void setData(GirlBean girlBean);
     }
 
-    abstract class Presenter extends BasePresenter<View, Model> { //绑定View和Model
-        public abstract void getGirlData(int pageSize, int pageNum);
+    interface presenter extends BasePresenter{ //获取数据
+        void requestGirlData(Context mContext,int pageSize, int pageNum);
     }
 
 }

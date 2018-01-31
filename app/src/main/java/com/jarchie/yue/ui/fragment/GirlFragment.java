@@ -8,22 +8,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.jarchie.common.base.BaseFragment;
 import com.jarchie.common.widget.LoadingTip;
 import com.jarchie.common.widget.RefreshInitView;
 import com.jarchie.yue.R;
-import com.jarchie.yue.bean.GirlBean;
 import com.jarchie.yue.constant.Constant;
 import com.jarchie.yue.mvp.contract.GirlContract;
-import com.jarchie.yue.mvp.model.GirlModel;
+import com.jarchie.yue.mvp.model.GirlBean;
 import com.jarchie.yue.mvp.presenter.GirlPresenter;
 import com.jarchie.yue.ui.adapter.GirlAdapter;
 import com.jarchie.yue.ui.widget.CommonDialog;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import butterknife.Bind;
  * 妹子Fragment
  */
 
-public class GirlFragment extends BaseFragment<GirlPresenter, GirlModel> implements GirlContract.View, OnRefreshListener, OnLoadmoreListener {
+public class GirlFragment extends BaseFragment<GirlContract.presenter> implements GirlContract.View, OnRefreshListener, OnLoadmoreListener {
 
     @Bind(R.id.topbar_back)
     ImageView mTopbarBack;
@@ -47,6 +47,10 @@ public class GirlFragment extends BaseFragment<GirlPresenter, GirlModel> impleme
     RecyclerView mGirlRecycle;
     @Bind(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
+    @Bind(R.id.mHeader)
+    ClassicsHeader mHeader;
+    @Bind(R.id.mFooter)
+    ClassicsFooter mFooter;
     private List<GirlBean.ResultsBean> mList = new ArrayList<>();
     private GirlAdapter mAdapter;
     private int pageNum = 1;
@@ -60,10 +64,8 @@ public class GirlFragment extends BaseFragment<GirlPresenter, GirlModel> impleme
     }
 
     @Override
-    public void initPresenter() {
-        mPresenter.setVM(this, mModel);
-        RefreshInitView.initView(mRefreshLayout);
-        mPresenter.getGirlData(Constant.PAGE_SIZE, 1);
+    public GirlContract.presenter initPresenter() {
+        return new GirlPresenter(this);
     }
 
     @Override
@@ -74,6 +76,7 @@ public class GirlFragment extends BaseFragment<GirlPresenter, GirlModel> impleme
 
     @Override
     public void initData() { //初始化数据
+        RefreshInitView.initView(mRefreshLayout);
         mTopbarBack.setVisibility(View.GONE);
         mTopbarTitle.setText("漂亮妹纸");
         RefreshInitView.initDataView(mRefreshLayout, getActivity());
@@ -81,13 +84,15 @@ public class GirlFragment extends BaseFragment<GirlPresenter, GirlModel> impleme
         mGirlRecycle.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new GirlAdapter(getContext(), mList);
         mGirlRecycle.setAdapter(mAdapter);
-        mCommonDialog = new CommonDialog(getContext(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,R.layout.dialog_girl, Gravity.CENTER);
+        mPresenter.requestGirlData(getContext(), Constant.PAGE_SIZE, pageNum);
+        mCommonDialog = new CommonDialog(getContext(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, R.layout.dialog_girl, Gravity.CENTER);
         mPhotoView = mCommonDialog.findViewById(R.id.dialog_photo);
     }
 
     @Override
-    public void returnGirlData(GirlBean girlBean) { //数据返回到View层
+    public void setData(GirlBean girlBean) {
         mList.addAll(girlBean.getResults());
+        mAdapter.notifyDataSetChanged();
         mAdapter.setOnItemClickListener(new GirlAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -100,33 +105,38 @@ public class GirlFragment extends BaseFragment<GirlPresenter, GirlModel> impleme
     @Override
     public void onRefresh(RefreshLayout refreshlayout) { //刷新数据
         mList.clear();
-        mPresenter.getGirlData(Constant.PAGE_SIZE, Constant.PAGE_NUM);
+        mPresenter.requestGirlData(getContext(), Constant.PAGE_SIZE, Constant.PAGE_NUM);
         mRefreshLayout.finishRefresh();
     }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) { //加载数据
-        mPresenter.getGirlData(Constant.PAGE_SIZE, ++pageNum);
+        mPresenter.requestGirlData(getContext(), Constant.PAGE_SIZE, ++pageNum);
         mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishLoadmore();
     }
 
     @Override
     public void showLoading(String title) {
-        mRefreshLayout.setVisibility(View.GONE);
+        mGirlRecycle.setVisibility(View.GONE);
+        mHeader.setVisibility(View.GONE);
+        mFooter.setVisibility(View.GONE);
         mLoadedTip.setLoadingTip(LoadingTip.LoadStatus.loading);
     }
 
     @Override
     public void stopLoading() {
         mLoadedTip.setLoadingTip(LoadingTip.LoadStatus.finish);
-        mRefreshLayout.setVisibility(View.VISIBLE);
+        mGirlRecycle.setVisibility(View.VISIBLE);
+        mHeader.setVisibility(View.VISIBLE);
+        mFooter.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showErrorTip(String msg) {
-        mRefreshLayout.setVisibility(View.GONE);
+        mGirlRecycle.setVisibility(View.GONE);
+        mHeader.setVisibility(View.GONE);
+        mFooter.setVisibility(View.GONE);
         mLoadedTip.setLoadingTip(LoadingTip.LoadStatus.error);
     }
-
 }

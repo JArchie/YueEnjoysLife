@@ -4,15 +4,13 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-
-import com.gyf.barlibrary.ImmersionBar;
 import com.jarchie.common.R;
 import com.jarchie.common.utils.ActivityManager;
-import com.jarchie.common.utils.TUtil;
 import com.jarchie.common.utils.ToastUtil;
 import com.jarchie.common.widget.LoadingDialog;
-
+import com.jarchie.common.widget.StatusBarCompat;
 import butterknife.ButterKnife;
 
 /**
@@ -20,30 +18,22 @@ import butterknife.ButterKnife;
  * 封装Activity的基类
  */
 
-public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel> extends AppCompatActivity {
+public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements BaseView {
 
     public P mPresenter;
-    public M mModel;
     public Context mContext;
     private boolean isConfigChange = false;
-    private ImmersionBar mImmersionBar; //沉浸式模式
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isConfigChange = false;
         ActivityManager.getInstance().addActivity(this);
-        mImmersionBar = ImmersionBar.with(this);
-        mImmersionBar.init();
+        setStatusBarColor();
         setContentView(getLayoutId());
         ButterKnife.bind(this);
         mContext = this;
-        mPresenter = TUtil.getT(this, 0);
-        mModel = TUtil.getT(this, 1);
-        if (mPresenter != null) {
-            mPresenter.mContext = this;
-        }
-        initPresenter();
+        mPresenter = initPresenter();
         initListener();
         initData();
     }
@@ -56,25 +46,37 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        if (mImmersionBar != null) {
-            mImmersionBar.destroy();
-        }
         ButterKnife.unbind(this);
         if (mPresenter != null) {
-            mPresenter.onDetach();
+            mPresenter.detach();
             mPresenter = null;
         }
         if (!isConfigChange) {
             ActivityManager.getInstance().finishActivity(this);
         }
+        super.onDestroy();
+    }
+
+    //着色状态栏（4.4以上系统有效）
+    public void setStatusBarColor(){
+        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this,R.color.color_main));
+    }
+
+    //着色状态栏（4.4以上系统有效）
+    public void setStatusBarColor(int color){
+        StatusBarCompat.setStatusBarColor(this,color);
+    }
+
+    //沉浸状态栏（4.4以上系统有效）
+    public void setTranslanteBar(){
+        StatusBarCompat.translucentStatusBar(this);
     }
 
     //获取布局文件
     public abstract int getLayoutId();
 
     //简单页面无需mvp就不用管此方法即可,完美兼容各种实际场景的变通
-    public abstract void initPresenter();
+    public abstract P initPresenter();
 
     //初始化view
     public abstract void initListener();

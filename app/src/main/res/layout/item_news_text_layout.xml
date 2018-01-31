@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/news_list_card_view"
+    app:cardElevation="2dp">
+    <!--app:cardCornerRadius="2dp"-->
+    <!--app:contentPadding="0dp"-->
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_text_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_fff">
+
+        <com.jarchie.common.glide.GlideImageView
+            android:id="@+id/iv_text_photo"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/item_margin"
+            android:scaleType="centerCrop"
+            tools:src="@mipmap/ic_launcher"
+            tools:targetApi="lollipop" />
+
+        <TextView
+            android:id="@+id/tv_text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/iv_text_photo"
+            android:layout_marginRight="@dimen/item_margin"
+            android:layout_toRightOf="@+id/iv_text_photo"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/color_333"
+            android:textSize="15sp"
+            tools:text="标题文字文字文字文字" />
+
+        <TextView
+            android:id="@+id/tv_text_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/item_margin"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/iv_text_photo"
+            android:layout_below="@id/tv_text_title"
+            android:lines="3"
+            android:ellipsize="end"
+            android:textColor="@color/color_666"
+            android:textSize="14sp"
+            tools:text="标题文字文字文字文字" />
+
+        <TextView
+            android:id="@+id/tv_text_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_text_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="@dimen/item_margin"
+            android:textColor="@color/color_777"
+            android:textSize="14sp"
+            tools:text="2018-01-28 20:09" />
+
+        <TextView
+            android:id="@+id/tv_text_src"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_text_time"
+            android:layout_below="@id/tv_text_content"
+            android:layout_alignLeft="@+id/tv_text_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="@dimen/item_margin"
+            android:textColor="@color/color_777"
+            android:textSize="14sp"
+            tools:text="新浪" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
