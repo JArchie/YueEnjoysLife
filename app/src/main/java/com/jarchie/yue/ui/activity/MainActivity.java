@@ -1,11 +1,17 @@
 package com.jarchie.yue.ui.activity;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import com.jarchie.common.base.BaseActivity;
-import com.jarchie.common.base.BasePresenter;
+import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
+
+import com.coder.zzq.smartshow.toast.SmartToast;
+import com.jarchie.common.utils.ActivityManager;
 import com.jarchie.yue.R;
+import com.jarchie.yue.constant.Constant;
 import com.jarchie.yue.ui.fragment.GirlFragment;
 import com.jarchie.yue.ui.fragment.AssistantFragment;
 import com.jarchie.yue.ui.fragment.NewsFragment;
@@ -15,28 +21,33 @@ import com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView;
 import com.luseen.luseenbottomnavigation.BottomNavigation.OnBottomNavigationItemClickListener;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Jarchie on 2018\1\24.
  * 项目主页Activity
  */
-public class MainActivity extends BaseActivity implements OnBottomNavigationItemClickListener {
+public class MainActivity extends AppCompatActivity implements OnBottomNavigationItemClickListener {
 
     @Bind(R.id.navigation_view)
     BottomNavigationView mNavigationView;
     private Fragment newsFragment, girlFragment, videoFragment, assistantFragment;
+    private static long exitTime = 0; //退出APP的时间
 
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_main;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ActivityManager.getInstance().addActivity(this);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        initListener();
+        initData();
     }
 
-    @Override
     public void initListener() {
         mNavigationView.setOnBottomNavigationItemClickListener(this);
     }
 
-    @Override
     public void initData() {
         initNavigationView();
         mNavigationView.selectTab(0);
@@ -136,24 +147,31 @@ public class MainActivity extends BaseActivity implements OnBottomNavigationItem
         }
     }
 
-
     @Override
-    public BasePresenter initPresenter() {
-        return null;
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > Constant.EXIT_TIME) {
+                SmartToast.show("再按一次退出程序");
+                exitTime = System.currentTimeMillis();
+            } else {
+                ActivityManager.getInstance().finishAllActivity();
+                //结束进程
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(0);
+                if (exitTime != 0) {
+                    exitTime = 0;
+                }
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
-    public void showLoading(String title) {
-
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+        ActivityManager.getInstance().removeActivity(this);
     }
 
-    @Override
-    public void stopLoading() {
-
-    }
-
-    @Override
-    public void showErrorTip(String msg) {
-
-    }
 }

@@ -13,7 +13,7 @@ import com.jarchie.common.R;
 
 public class BaseApplication extends Application {
 
-    private static Context mContext;
+    public static Context mContext;
 
     @Override
     public void onCreate() {
@@ -21,7 +21,7 @@ public class BaseApplication extends Application {
         mContext = this;
         //初始化SmartToast对象，自定义Toast显示
         SmartToast.plainToast(this)
-                .backgroundColorRes(R.color.color_50)
+                .backgroundColorRes(R.color.color_main)
                 .textColorRes(R.color.color_fff)
                 .textSizeSp(16)
                 .textBold(true);

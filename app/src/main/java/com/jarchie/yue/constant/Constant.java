@@ -7,6 +7,9 @@ package com.jarchie.yue.constant;
 
 public class Constant {
 
+    //Back键退出应用所需时间
+    public static final int EXIT_TIME = 2000;
+
     //页码
     public static final int PAGE_START = 0;
     public static final int PAGE_NUM = 1;

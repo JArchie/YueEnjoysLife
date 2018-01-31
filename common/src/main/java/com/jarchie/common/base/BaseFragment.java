@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.jarchie.common.R;
+import com.jarchie.common.utils.BackHandlerHelper;
+import com.jarchie.common.utils.FragmentBackHandler;
 import com.jarchie.common.utils.ToastUtil;
 import com.jarchie.common.widget.LoadingDialog;
 import butterknife.ButterKnife;
@@ -17,7 +19,7 @@ import butterknife.ButterKnife;
  * 封装Fragment的基类
  */
 
-public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements BaseView{
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements BaseView,FragmentBackHandler{
 
     protected View mRootView;
     public P mPresenter;
@@ -118,5 +120,10 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
 
     public void showNetErrorTip(String error) {
         ToastUtil.showToastWithImg(error, R.drawable.ic_wifi_off);
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        return BackHandlerHelper.handleBackPress(this);
     }
 }
