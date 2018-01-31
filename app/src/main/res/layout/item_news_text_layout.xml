@@ -62,7 +62,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="@dimen/item_margin"
             android:textColor="@color/color_777"
-            android:textSize="14sp"
+            android:textSize="13sp"
             tools:text="2018-01-28 20:09" />
 
         <TextView
@@ -75,7 +75,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="@dimen/item_margin"
             android:textColor="@color/color_777"
-            android:textSize="14sp"
+            android:textSize="12sp"
             tools:text="新浪" />
 
     </RelativeLayout>
