@@ -33,4 +33,13 @@ public class Constant {
     //新闻appkey
     public static final String NEWS_KEY = "a17c04f329d9d88f";
 
+    //视频类型标识
+    public static final String VIDEO_TYPE = "video_type";
+
+    //视频类型：热点、娱乐、搞笑、精品
+    public static final String VIDEO_RD = "V9LG4B3A0";
+    public static final String VIDEO_YL = "V9LG4CHOR";
+    public static final String VIDEO_GX = "V9LG4E6VR";
+    public static final String VIDEO_JP = "00850FRB";
+
 }

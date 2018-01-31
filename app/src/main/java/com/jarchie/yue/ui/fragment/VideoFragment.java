@@ -1,60 +1,77 @@
 package com.jarchie.yue.ui.fragment;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.jarchie.common.base.BaseFragment;
-import com.jarchie.common.base.BasePresenter;
+import android.view.ViewGroup;
 import com.jarchie.yue.R;
-
+import com.jarchie.yue.constant.Constant;
+import com.jarchie.yue.ui.adapter.VideoPagerAdapter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Jarchie on 2018\1\24.
  * 视频Fragment
  */
 
-public class VideoFragment extends BaseFragment {
+public class VideoFragment extends Fragment implements ViewPager.OnPageChangeListener {
 
-    @Bind(R.id.topbar_back)
-    ImageView mTopbarBack;
-    @Bind(R.id.topbar_title)
-    TextView mTopbarTitle;
+    @Bind(R.id.mTabLayout)
+    TabLayout mTabLayout;
+    @Bind(R.id.mViewPager)
+    ViewPager mViewPager;
 
+    @Nullable
     @Override
-    public int getLayoutId() {
-        return R.layout.fragment_video_layout;
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View mRootView = inflater.inflate(R.layout.fragment_video_layout, container, false);
+        ButterKnife.bind(this, mRootView);
+        initListener();
+        initData();
+        return mRootView;
     }
 
-    @Override
     public void initListener() {
-
+        mViewPager.addOnPageChangeListener(this);
     }
 
-    @Override
     public void initData() {
-        mTopbarBack.setVisibility(View.GONE);
-        mTopbarTitle.setText("视频");
+        List<String> titles = Arrays.asList(getContext().getResources().getStringArray(R.array.video_type_name));
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(VideoListFragment.newInstance(Constant.VIDEO_RD));
+        fragments.add(VideoListFragment.newInstance(Constant.VIDEO_YL));
+        fragments.add(VideoListFragment.newInstance(Constant.VIDEO_GX));
+        fragments.add(VideoListFragment.newInstance(Constant.VIDEO_JP));
+        VideoPagerAdapter mAdapter = new VideoPagerAdapter(getChildFragmentManager());
+        mAdapter.setFragments(titles, fragments);
+        mViewPager.setCurrentItem(0);
+        mViewPager.setAdapter(mAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
-    public BasePresenter initPresenter() {
-        return null;
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
     @Override
-    public void showLoading(String title) {
-
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
     }
 
     @Override
-    public void stopLoading() {
-
+    public void onPageSelected(int position) {
     }
 
     @Override
-    public void showErrorTip(String msg) {
-
+    public void onPageScrollStateChanged(int state) {
     }
 }
