@@ -9,12 +9,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jarchie.common.glide.GlideImageView;
 import com.jarchie.yue.R;
+import com.jarchie.yue.constant.Constant;
 import com.jarchie.yue.mvp.model.VideoBean;
 import com.jarchie.yue.ui.widget.CustomCoverVideo;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -48,21 +48,19 @@ public class VideoNormalHolder extends RecyclerItemBaseHolder {
         gsyVideoOptionBuilder = new GSYVideoOptionBuilder();
     }
 
-    public void onBind(int position, VideoBean.DataBeanX.DataBean bean) {
+    public void onBind(int position, VideoBean bean,String mType) {
         //增加封面
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Glide.with(mContext).load(bean.getGroup().getLarge_cover().getUrl_list().get(0).getUrl()).into(imageView);
+        Glide.with(mContext).load(Constant.getTJFmImgs().get(position)).into(imageView);
         if (imageView.getParent() != null) {
             ViewGroup viewGroup = (ViewGroup) imageView.getParent();
             viewGroup.removeView(imageView);
         }
-
-//        ivLogo.loadImage(bean.getTopicImg(), R.color.placeholder_color);
+        ivLogo.loadLocalCircleImage(R.drawable.neihan, R.color.placeholder_color);
         tvFrom.setText("内涵段子");
-//        tvPlayTime.setText(String.format(mContext.getResources().getString(R.string.video_play_times), String.valueOf(bean.getPlayCount())));
 
-        String url = bean.getGroup().getMp4_url();
-        String title = "你想看的";
+        String url = Constant.getTJUrls().get(position);
+        String title = Constant.getTJTitles().get(position);
 
         //防止错位，离开释放
         //gsyVideoPlayer.initUIState();

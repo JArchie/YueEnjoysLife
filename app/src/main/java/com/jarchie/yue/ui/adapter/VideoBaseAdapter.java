@@ -26,14 +26,16 @@ import butterknife.Bind;
 public class VideoBaseAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
-    private List<VideoBean.DataBeanX.DataBean> mList;
+    private List<VideoBean> mList;
     private SmallVideoHelper smallVideoHelper;
+    private String mType;
 
     private SmallVideoHelper.GSYSmallVideoHelperBuilder gsySmallVideoHelperBuilder;
 
-    public VideoBaseAdapter(Context context, List<VideoBean.DataBeanX.DataBean> list) {
+    public VideoBaseAdapter(Context context, List<VideoBean> list,String type) {
         this.mContext = context;
         this.mList = list;
+        this.mType = type;
     }
 
     @Override
@@ -47,7 +49,7 @@ public class VideoBaseAdapter extends RecyclerView.Adapter {
         VideoItemHolder mHolder = (VideoItemHolder) holder;
         mHolder.setVideoHelper(smallVideoHelper, gsySmallVideoHelperBuilder);
         mHolder.setRecyclerBaseAdapter(this);
-        mHolder.onBind(position, mList.get(position));
+        mHolder.onBind(position, mList.get(position),mType);
     }
 
     @Override

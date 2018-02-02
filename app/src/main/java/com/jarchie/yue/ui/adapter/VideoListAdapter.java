@@ -18,11 +18,13 @@ import java.util.List;
 public class VideoListAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
-    private List<VideoBean.DataBeanX.DataBean> mList;
+    private List<VideoBean> mList;
+    private String mType;
 
-    public VideoListAdapter(Context context, List<VideoBean.DataBeanX.DataBean> list) {
+    public VideoListAdapter(Context context, List<VideoBean> list,String type) {
         this.mContext = context;
         this.mList = list;
+        this.mType = type;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class VideoListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         VideoNormalHolder mHolder = (VideoNormalHolder) holder;
         mHolder.setRecyclerBaseAdapter(this);
-        mHolder.onBind(position, mList.get(position));
+        mHolder.onBind(position, mList.get(position),mType);
     }
 
     @Override

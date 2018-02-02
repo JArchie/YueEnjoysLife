@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.jarchie.yue.R;
+import com.jarchie.yue.constant.Constant;
 import com.jarchie.yue.mvp.model.VideoBean;
 
 import butterknife.Bind;
@@ -27,7 +28,7 @@ public class VideoItemHolder extends RecyclerItemBaseHolder{
     @Bind(R.id.list_item_btn)
     ImageView listItemBtn;
 
-    ImageView imageView;
+    private ImageView imageView;
 
     private SmallVideoHelper smallVideoHelper;
 
@@ -40,11 +41,11 @@ public class VideoItemHolder extends RecyclerItemBaseHolder{
         imageView = new ImageView(context);
     }
 
-    public void onBind(final int position, final VideoBean.DataBeanX.DataBean bean) {
+    public void onBind(final int position, final VideoBean bean,String mType) {
 
         //增加封面
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Glide.with(mContext).load(bean.getGroup().getLarge_cover().getUrl_list().get(0).getUrl()).into(imageView);
+        Glide.with(mContext).load(Constant.getTJFmImgs().get(position)).into(imageView);
 
         smallVideoHelper.addVideoPlayer(position, imageView, TAG, listItemContainer, listItemBtn);
 
@@ -54,10 +55,10 @@ public class VideoItemHolder extends RecyclerItemBaseHolder{
                 getRecyclerBaseAdapter().notifyDataSetChanged();
                 //listVideoUtil.setLoop(true);
                 smallVideoHelper.setPlayPositionAndTag(position, TAG);
-                String url = bean.getGroup().getMp4_url();
+                String url = Constant.getTJUrls().get(position);
                 //listVideoUtil.setCachePath(new File(FileUtils.getPath()));
-
-                gsySmallVideoHelperBuilder.setVideoTitle("title " + position).setUrl(url);
+                String title = Constant.getTJTitles().get(position);
+                gsySmallVideoHelperBuilder.setVideoTitle(title).setUrl(url);
 
                 smallVideoHelper.startPlay();
 

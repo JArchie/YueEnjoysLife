@@ -28,7 +28,7 @@ public interface ApiService {
     Call<GirlBean> requestGirlData(@Path("size") int size, @Path("page") int page);
 
     //视频模块接口
-    @GET("neihan/stream/mix/v1")
-    Call<VideoBean> requestVideoListData(@Query("content_type") String content_type, @Query("count") int count);
+//    @GET("neihan/stream/mix/v1")
+//    Call<VideoBean> requestVideoListData(@Query("content_type") String content_type, @Query("count") int count);
 
 }

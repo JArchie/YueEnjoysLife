@@ -13,14 +13,13 @@ import android.view.View;
 import android.view.Window;
 
 import com.jarchie.common.base.BaseFragment;
+import com.jarchie.common.base.BasePresenter;
 import com.jarchie.common.utils.BackHandlerHelper;
 import com.jarchie.common.widget.LoadingTip;
 import com.jarchie.common.widget.RefreshInitView;
 import com.jarchie.yue.R;
 import com.jarchie.yue.constant.Constant;
-import com.jarchie.yue.mvp.contract.VideoContract;
 import com.jarchie.yue.mvp.model.VideoBean;
-import com.jarchie.yue.mvp.presenter.VideoListPresenter;
 import com.jarchie.yue.ui.adapter.VideoBaseAdapter;
 import com.jarchie.yue.ui.adapter.VideoListAdapter;
 import com.jarchie.yue.ui.videohelper.VideoNormalHolder;
@@ -44,7 +43,7 @@ import butterknife.Bind;
  * 视频列表Fragment
  */
 
-public class VideoListFragment extends BaseFragment<VideoContract.presenter> implements VideoContract.View, OnRefreshListener, OnLoadmoreListener {
+public class VideoListFragment extends BaseFragment implements OnRefreshListener, OnLoadmoreListener {
 
     @Bind(R.id.mHeader)
     ClassicsHeader mHeader;
@@ -57,9 +56,8 @@ public class VideoListFragment extends BaseFragment<VideoContract.presenter> imp
     @Bind(R.id.mRefreshLayout)
     SmartRefreshLayout mRefreshLayout;
 
-    private int count = 10;
     private String videoType;
-    private List<VideoBean.DataBeanX.DataBean> mList = new ArrayList<>();
+    private List<VideoBean> mList = new ArrayList<>();
     private VideoListAdapter mAdapter;
     private boolean mFull = false;
     private LinearLayoutManager linearLayoutManager;
@@ -82,8 +80,8 @@ public class VideoListFragment extends BaseFragment<VideoContract.presenter> imp
     }
 
     @Override
-    public VideoContract.presenter initPresenter() {
-        return new VideoListPresenter(this);
+    public BasePresenter initPresenter() {
+        return null;
     }
 
     @Override
@@ -100,14 +98,13 @@ public class VideoListFragment extends BaseFragment<VideoContract.presenter> imp
         }
         RefreshInitView.initDataView(mRefreshLayout, getActivity());
 
-        if (recyclerBaseAdapter != null)
-            recyclerBaseAdapter.notifyDataSetChanged();
+        resolveData();
+
         linearLayoutManager = new LinearLayoutManager(getContext());
         mNewsRecycle.setLayoutManager(linearLayoutManager);
         mNewsRecycle.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new VideoListAdapter(getContext(), mList);
+        mAdapter = new VideoListAdapter(getContext(), mList, videoType);
         mNewsRecycle.setAdapter(mAdapter);
-        mPresenter.requestNewsListData(getContext(), videoType, count);
 
         mNewsRecycle.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int firstVisibleItem, lastVisibleItem;
@@ -120,7 +117,7 @@ public class VideoListFragment extends BaseFragment<VideoContract.presenter> imp
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                firstVisibleItem   = linearLayoutManager.findFirstVisibleItemPosition();
+                firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
                 lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
                 //大于0说明有播放
                 if (GSYVideoManager.instance().getPlayPosition() >= 0) {
@@ -131,7 +128,7 @@ public class VideoListFragment extends BaseFragment<VideoContract.presenter> imp
                             && (position < firstVisibleItem || position > lastVisibleItem)) {
                         //如果滑出去了上面和下面就是否，和今日头条一样
                         //是否全屏
-                        if(!mFull) {
+                        if (!mFull) {
                             GSYVideoPlayer.releaseAllVideos();
                             mAdapter.notifyDataSetChanged();
                         }
@@ -142,23 +139,12 @@ public class VideoListFragment extends BaseFragment<VideoContract.presenter> imp
     }
 
     @Override
-    public void setData(VideoBean list) {
-        mList.addAll(list.getData().getData());
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void onRefresh(RefreshLayout refreshlayout) {
-        mList.clear();
-        mPresenter.requestNewsListData(getContext(), videoType, Constant.PAGE_SIZE);
-        mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishRefresh();
     }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
-        mPresenter.requestNewsListData(getContext(), videoType, count+=10);
-        mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishLoadmore();
     }
 
@@ -177,7 +163,7 @@ public class VideoListFragment extends BaseFragment<VideoContract.presenter> imp
     public boolean onBackPressed() {
         if (StandardGSYVideoPlayer.backFromWindowFull(getContext())) {
             return true;
-        }else {
+        } else {
             return BackHandlerHelper.handleBackPress(this);
         }
     }
@@ -222,6 +208,15 @@ public class VideoListFragment extends BaseFragment<VideoContract.presenter> imp
         mHeader.setVisibility(View.GONE);
         mFooter.setVisibility(View.GONE);
         mLoadedTip.setLoadingTip(LoadingTip.LoadStatus.error);
+    }
+
+    private void resolveData() {
+        for (int i = 0; i < 10; i++) {
+            VideoBean videoBean = new VideoBean();
+            mList.add(videoBean);
+        }
+        if (recyclerBaseAdapter != null)
+            recyclerBaseAdapter.notifyDataSetChanged();
     }
 
     //新建Fragment的实例,供外部调用
