@@ -12,10 +12,9 @@
     </string-array>
 
     <string-array name="video_type_name">
-        <item>热点</item>
-        <item>娱乐</item>
-        <item>搞笑</item>
-        <item>精品</item>
+        <item>推荐</item>
+        <item>视频</item>
+        <item>段友秀</item>
     </string-array>
 
 </resources>

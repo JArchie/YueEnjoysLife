@@ -6,4 +6,5 @@
     <string name="tab_assistant">助手</string>
     <string name="top_title">标题</string>
     <string name="news_title">新闻频道</string>
+    <string name="video_play_times">%1$s次播放</string>
 </resources>
