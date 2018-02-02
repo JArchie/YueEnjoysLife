@@ -46,10 +46,9 @@ public class VideoFragment extends Fragment implements ViewPager.OnPageChangeLis
     public void initData() {
         List<String> titles = Arrays.asList(getContext().getResources().getStringArray(R.array.video_type_name));
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(VideoListFragment.newInstance(Constant.VIDEO_RD));
-        fragments.add(VideoListFragment.newInstance(Constant.VIDEO_YL));
-        fragments.add(VideoListFragment.newInstance(Constant.VIDEO_GX));
-        fragments.add(VideoListFragment.newInstance(Constant.VIDEO_JP));
+        fragments.add(VideoListFragment.newInstance(Constant.VIDEO_TJ));
+        fragments.add(VideoListFragment.newInstance(Constant.VIDEO_SP));
+        fragments.add(VideoListFragment.newInstance(Constant.VIDEO_DYX));
         VideoPagerAdapter mAdapter = new VideoPagerAdapter(getChildFragmentManager());
         mAdapter.setFragments(titles, fragments);
         mViewPager.setCurrentItem(0);

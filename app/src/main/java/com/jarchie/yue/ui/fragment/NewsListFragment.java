@@ -75,7 +75,6 @@ public class NewsListFragment extends BaseFragment<NewsListContract.presenter> i
         RefreshInitView.initDataView(mRefreshLayout, getActivity());
         mNewsRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
         mNewsRecycle.setItemAnimator(new DefaultItemAnimator());
-        mList.clear();
         mAdapter = new NewsListAdapter(getContext(), mList);
         mNewsRecycle.setAdapter(mAdapter);
         mPresenter.requestNewsListData(getContext(), channel, Constant.PAGE_START, Constant.PAGE_SIZE, Constant.NEWS_KEY);
@@ -91,6 +90,7 @@ public class NewsListFragment extends BaseFragment<NewsListContract.presenter> i
     public void onRefresh(RefreshLayout refreshlayout) {
         mList.clear();
         mPresenter.requestNewsListData(getContext(), channel, Constant.PAGE_START, Constant.PAGE_SIZE, Constant.NEWS_KEY);
+        mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishRefresh();
     }
 

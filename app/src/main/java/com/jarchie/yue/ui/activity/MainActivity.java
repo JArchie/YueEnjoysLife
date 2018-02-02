@@ -6,16 +6,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
-
-import com.coder.zzq.smartshow.toast.SmartToast;
 import com.jarchie.common.utils.ActivityManager;
 import com.jarchie.yue.R;
-import com.jarchie.yue.constant.Constant;
 import com.jarchie.yue.ui.fragment.GirlFragment;
 import com.jarchie.yue.ui.fragment.AssistantFragment;
 import com.jarchie.yue.ui.fragment.NewsFragment;
 import com.jarchie.yue.ui.fragment.VideoFragment;
+import com.jarchie.yue.utils.CommonUtils;
 import com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationItem;
 import com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView;
 import com.luseen.luseenbottomnavigation.BottomNavigation.OnBottomNavigationItemClickListener;
@@ -32,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements OnBottomNavigatio
     @Bind(R.id.navigation_view)
     BottomNavigationView mNavigationView;
     private Fragment newsFragment, girlFragment, videoFragment, assistantFragment;
-    private static long exitTime = 0; //退出APP的时间
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -148,23 +144,8 @@ public class MainActivity extends AppCompatActivity implements OnBottomNavigatio
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if ((System.currentTimeMillis() - exitTime) > Constant.EXIT_TIME) {
-                SmartToast.show("再按一次退出程序");
-                exitTime = System.currentTimeMillis();
-            } else {
-                ActivityManager.getInstance().finishAllActivity();
-                //结束进程
-                android.os.Process.killProcess(android.os.Process.myPid());
-                System.exit(0);
-                if (exitTime != 0) {
-                    exitTime = 0;
-                }
-            }
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
+    public void onBackPressed() {
+        CommonUtils.exitApp(this);
     }
 
     @Override

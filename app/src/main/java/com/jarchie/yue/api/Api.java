@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.util.SparseArray;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jarchie.yue.constant.ApiConstant;
 import com.jarchie.yue.constant.HostType;
 
@@ -36,9 +38,10 @@ public class Api{
                 .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(getLoggerInterceptor())
                 .build();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").serializeNulls().create();
         retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .baseUrl(ApiConstant.getHost(hostType))
                 .build();
         apiService = retrofit.create(ApiService.class);
