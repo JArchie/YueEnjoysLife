@@ -28,6 +28,16 @@
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
     </style>
 
+    <!--段子列表样式-->
+    <style name="jokes_list_card_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">173dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
     <!--TabLayout的标题栏文字样式-->
     <style name="TabLayoutTextStyle">
         <item name="android:textSize">16sp</item>

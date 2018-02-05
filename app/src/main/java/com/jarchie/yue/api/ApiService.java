@@ -1,11 +1,8 @@
 package com.jarchie.yue.api;
 
 import com.jarchie.yue.mvp.model.GirlBean;
+import com.jarchie.yue.mvp.model.JokesBean;
 import com.jarchie.yue.mvp.model.NewsBean;
-import com.jarchie.yue.mvp.model.VideoBean;
-
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -30,5 +27,9 @@ public interface ApiService {
     //视频模块接口
 //    @GET("neihan/stream/mix/v1")
 //    Call<VideoBean> requestVideoListData(@Query("content_type") String content_type, @Query("count") int count);
+
+    //段子接口
+    @GET("neihan/stream/mix/v1")
+    Call<JokesBean> requestJokesListData(@Query("content_type") String content_type, @Query("count") int count);
 
 }

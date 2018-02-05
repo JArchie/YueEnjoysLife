@@ -48,7 +48,7 @@ public class VideoFragment extends Fragment implements ViewPager.OnPageChangeLis
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(VideoListFragment.newInstance(Constant.VIDEO_TJ));
         fragments.add(VideoListFragment.newInstance(Constant.VIDEO_SP));
-        fragments.add(VideoListFragment.newInstance(Constant.VIDEO_DYX));
+        fragments.add(new JokesFragment());
         VideoPagerAdapter mAdapter = new VideoPagerAdapter(getChildFragmentManager());
         mAdapter.setFragments(titles, fragments);
         mViewPager.setCurrentItem(0);

@@ -51,16 +51,23 @@ public class VideoNormalHolder extends RecyclerItemBaseHolder {
     public void onBind(int position, VideoBean bean,String mType) {
         //增加封面
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Glide.with(mContext).load(Constant.getTJFmImgs().get(position)).into(imageView);
+        String url = "",title = "";
+        if (mType.equals(Constant.VIDEO_TJ)){
+            Glide.with(mContext).load(Constant.getTJFmImgs().get(position)).into(imageView);
+            url = Constant.getTJUrls().get(position);
+            title = Constant.getTJTitles().get(position);
+        }else if (mType.equals(Constant.VIDEO_SP)){
+            Glide.with(mContext).load(Constant.getSPFmImgs().get(position)).into(imageView);
+            url = Constant.getSPUrls().get(position);
+            title = Constant.getSPTitles().get(position);
+        }
+
         if (imageView.getParent() != null) {
             ViewGroup viewGroup = (ViewGroup) imageView.getParent();
             viewGroup.removeView(imageView);
         }
         ivLogo.loadLocalCircleImage(R.drawable.neihan, R.color.placeholder_color);
         tvFrom.setText("内涵段子");
-
-        String url = Constant.getTJUrls().get(position);
-        String title = Constant.getTJTitles().get(position);
 
         //防止错位，离开释放
         //gsyVideoPlayer.initUIState();
@@ -83,9 +90,8 @@ public class VideoNormalHolder extends RecyclerItemBaseHolder {
                         super.onPrepared(url, objects);
                         if (!videoplayer.isIfCurrentIsFullscreen()) {
                             //静音
-                            GSYVideoManager.instance().setNeedMute(true);
+                            GSYVideoManager.instance().setNeedMute(false);
                         }
-
                     }
 
                     @Override

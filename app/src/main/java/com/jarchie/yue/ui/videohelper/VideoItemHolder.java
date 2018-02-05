@@ -41,11 +41,14 @@ public class VideoItemHolder extends RecyclerItemBaseHolder{
         imageView = new ImageView(context);
     }
 
-    public void onBind(final int position, final VideoBean bean,String mType) {
-
+    public void onBind(final int position, final VideoBean bean, final String mType) {
         //增加封面
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Glide.with(mContext).load(Constant.getTJFmImgs().get(position)).into(imageView);
+        if (mType.equals(Constant.VIDEO_TJ)){
+            Glide.with(mContext).load(Constant.getTJFmImgs().get(position)).into(imageView);
+        }else if (mType.equals(Constant.VIDEO_SP)){
+            Glide.with(mContext).load(Constant.getSPFmImgs().get(position)).into(imageView);
+        }
 
         smallVideoHelper.addVideoPlayer(position, imageView, TAG, listItemContainer, listItemBtn);
 
@@ -55,13 +58,17 @@ public class VideoItemHolder extends RecyclerItemBaseHolder{
                 getRecyclerBaseAdapter().notifyDataSetChanged();
                 //listVideoUtil.setLoop(true);
                 smallVideoHelper.setPlayPositionAndTag(position, TAG);
-                String url = Constant.getTJUrls().get(position);
+                String url = "",title = "";
+                if (mType.equals(Constant.VIDEO_TJ)){
+                    url = Constant.getTJUrls().get(position);
+                    title = Constant.getTJTitles().get(position);
+                }else if (mType.equals(Constant.VIDEO_SP)){
+                    url = Constant.getSPUrls().get(position);
+                    title = Constant.getSPTitles().get(position);
+                }
                 //listVideoUtil.setCachePath(new File(FileUtils.getPath()));
-                String title = Constant.getTJTitles().get(position);
                 gsySmallVideoHelperBuilder.setVideoTitle(title).setUrl(url);
-
                 smallVideoHelper.startPlay();
-
                 //必须在startPlay之后设置才能生效
                 //listVideoUtil.getGsyVideoPlayer().getTitleTextView().setVisibility(View.VISIBLE);
             }

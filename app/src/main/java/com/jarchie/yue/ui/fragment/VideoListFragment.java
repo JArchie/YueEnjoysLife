@@ -12,6 +12,7 @@ import android.transition.Explode;
 import android.view.View;
 import android.view.Window;
 
+import com.coder.zzq.smartshow.toast.SmartToast;
 import com.jarchie.common.base.BaseFragment;
 import com.jarchie.common.base.BasePresenter;
 import com.jarchie.common.utils.BackHandlerHelper;
@@ -43,6 +44,7 @@ import butterknife.Bind;
  * 视频列表Fragment
  */
 
+@SuppressWarnings({"RedundantIfStatement", "SimplifiableIfStatement"})
 public class VideoListFragment extends BaseFragment implements OnRefreshListener, OnLoadmoreListener {
 
     @Bind(R.id.mHeader)
@@ -62,6 +64,7 @@ public class VideoListFragment extends BaseFragment implements OnRefreshListener
     private boolean mFull = false;
     private LinearLayoutManager linearLayoutManager;
     VideoBaseAdapter recyclerBaseAdapter;
+    private boolean flag = true;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,7 +101,7 @@ public class VideoListFragment extends BaseFragment implements OnRefreshListener
         }
         RefreshInitView.initDataView(mRefreshLayout, getActivity());
 
-        resolveData();
+        resolveData(0,10);
 
         linearLayoutManager = new LinearLayoutManager(getContext());
         mNewsRecycle.setLayoutManager(linearLayoutManager);
@@ -140,11 +143,16 @@ public class VideoListFragment extends BaseFragment implements OnRefreshListener
 
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
+        flag = true;
+        mList.clear();
+        resolveData(0,10);
         mRefreshLayout.finishRefresh();
     }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
+        resolveData(10,20);
+        flag = false;
         mRefreshLayout.finishLoadmore();
     }
 
@@ -161,6 +169,7 @@ public class VideoListFragment extends BaseFragment implements OnRefreshListener
 
     @Override
     public boolean onBackPressed() {
+        SmartToast.showInCenter("监听到了");
         if (StandardGSYVideoPlayer.backFromWindowFull(getContext())) {
             return true;
         } else {
@@ -210,13 +219,15 @@ public class VideoListFragment extends BaseFragment implements OnRefreshListener
         mLoadedTip.setLoadingTip(LoadingTip.LoadStatus.error);
     }
 
-    private void resolveData() {
-        for (int i = 0; i < 10; i++) {
-            VideoBean videoBean = new VideoBean();
-            mList.add(videoBean);
+    private void resolveData(int start,int size) {
+        if (flag){
+            for (int i = start; i < size; i++) {
+                VideoBean videoBean = new VideoBean();
+                mList.add(videoBean);
+            }
+            if (recyclerBaseAdapter != null)
+                recyclerBaseAdapter.notifyDataSetChanged();
         }
-        if (recyclerBaseAdapter != null)
-            recyclerBaseAdapter.notifyDataSetChanged();
     }
 
     //新建Fragment的实例,供外部调用
