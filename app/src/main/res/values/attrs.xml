@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomToolBar">
+        <attr name="leftButtonIcon" format="reference"/>
+        <attr name="rightButtonIcon" format="reference"/>
+        <attr name="isShowSearchView" format="boolean"/>
+    </declare-styleable>
+</resources>

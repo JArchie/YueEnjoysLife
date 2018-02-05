@@ -4,5 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/common_title_bar" />
+    <com.jarchie.yue.ui.widget.CustomToolBar
+        android:id="@+id/mToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_main"
+        android:minHeight="?attr/actionBarSize"/>
+
 </LinearLayout>

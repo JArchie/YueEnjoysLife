@@ -37,6 +37,10 @@ public class Constant {
     //新闻appkey
     public static final String NEWS_KEY = "a17c04f329d9d88f";
 
+    //处理Activity和Fragment中的WebView返回键
+    public static final int BACK_PREVIOUS_ACTIVITY = 1;
+    public static final int BACK_PREVIOUS_FRAGMENT = 2;
+
     //视频类型标识
     public static final String VIDEO_TYPE = "video_type";
 

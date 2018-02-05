@@ -1,13 +1,9 @@
 package com.jarchie.yue.ui.fragment;
 
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.jarchie.common.base.BaseFragment;
 import com.jarchie.common.base.BasePresenter;
 import com.jarchie.yue.R;
-
+import com.jarchie.yue.ui.widget.CustomToolBar;
 import butterknife.Bind;
 
 /**
@@ -17,10 +13,8 @@ import butterknife.Bind;
 
 public class AssistantFragment extends BaseFragment {
 
-    @Bind(R.id.topbar_back)
-    ImageView mTopbarBack;
-    @Bind(R.id.topbar_title)
-    TextView mTopbarTitle;
+    @Bind(R.id.mToolbar)
+    CustomToolBar mToolbar;
 
     @Override
     public int getLayoutId() {
@@ -34,8 +28,8 @@ public class AssistantFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        mTopbarBack.setVisibility(View.GONE);
-        mTopbarTitle.setText("助手");
+        mToolbar.setTitle("助手");
+        mToolbar.hideBack();
     }
 
     @Override

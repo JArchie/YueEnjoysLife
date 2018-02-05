@@ -6,11 +6,10 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.jarchie.common.base.BaseFragment;
+import com.jarchie.common.utils.BackHandlerHelper;
 import com.jarchie.common.widget.LoadingTip;
 import com.jarchie.common.widget.RefreshInitView;
 import com.jarchie.yue.R;
@@ -20,6 +19,7 @@ import com.jarchie.yue.mvp.model.GirlBean;
 import com.jarchie.yue.mvp.presenter.GirlPresenter;
 import com.jarchie.yue.ui.adapter.GirlAdapter;
 import com.jarchie.yue.ui.widget.CommonDialog;
+import com.jarchie.yue.ui.widget.CustomToolBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -37,10 +37,6 @@ import butterknife.Bind;
 
 public class GirlFragment extends BaseFragment<GirlContract.presenter> implements GirlContract.View, OnRefreshListener, OnLoadmoreListener {
 
-    @Bind(R.id.topbar_back)
-    ImageView mTopbarBack;
-    @Bind(R.id.topbar_title)
-    TextView mTopbarTitle;
     @Bind(R.id.loadedTip)
     LoadingTip mLoadedTip;
     @Bind(R.id.girl_recycle)
@@ -51,6 +47,8 @@ public class GirlFragment extends BaseFragment<GirlContract.presenter> implement
     ClassicsHeader mHeader;
     @Bind(R.id.mFooter)
     ClassicsFooter mFooter;
+    @Bind(R.id.mToolbar)
+    CustomToolBar mToolbar;
     private List<GirlBean.ResultsBean> mList = new ArrayList<>();
     private GirlAdapter mAdapter;
     private int pageNum = 1;
@@ -77,8 +75,8 @@ public class GirlFragment extends BaseFragment<GirlContract.presenter> implement
     @Override
     public void initData() { //初始化数据
         RefreshInitView.initView(mRefreshLayout);
-        mTopbarBack.setVisibility(View.GONE);
-        mTopbarTitle.setText("漂亮妹纸");
+        mToolbar.hideBack();
+        mToolbar.setTitle("漂亮妹纸");
         RefreshInitView.initDataView(mRefreshLayout, getActivity());
         mGirlRecycle.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mGirlRecycle.setItemAnimator(new DefaultItemAnimator());
@@ -115,6 +113,16 @@ public class GirlFragment extends BaseFragment<GirlContract.presenter> implement
         mPresenter.requestGirlData(getContext(), Constant.PAGE_SIZE, ++pageNum);
         mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishLoadmore();
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        if (mCommonDialog.isShowing()) {
+            mCommonDialog.cancel();
+            return true;
+        } else {
+            return BackHandlerHelper.handleBackPress(this);
+        }
     }
 
     @Override

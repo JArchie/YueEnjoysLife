@@ -9,12 +9,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
+        <!--<android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/AppTheme.Toolbar"
             app:layout_scrollFlags="scroll|enterAlways|snap"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="@string/tab_video" />
+            app:title="@string/tab_video" />-->
+
+        <com.jarchie.yue.ui.widget.CustomToolBar
+            android:id="@+id/mToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_main"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways|snap" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/mTabLayout"

@@ -10,6 +10,7 @@ import com.jarchie.common.utils.BackHandlerHelper;
 import com.jarchie.yue.R;
 import com.jarchie.yue.constant.Constant;
 import com.jarchie.yue.ui.adapter.VideoPagerAdapter;
+import com.jarchie.yue.ui.widget.CustomToolBar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +29,8 @@ public class VideoFragment extends BaseFragment implements ViewPager.OnPageChang
     TabLayout mTabLayout;
     @Bind(R.id.mViewPager)
     ViewPager mViewPager;
+    @Bind(R.id.mToolbar)
+    CustomToolBar mToolbar;
 
     @Override
     public int getLayoutId() {
@@ -46,6 +49,8 @@ public class VideoFragment extends BaseFragment implements ViewPager.OnPageChang
 
     @Override
     public void initData() {
+        mToolbar.hideBack();
+        mToolbar.setTitle("内涵段子");
         List<String> titles = Arrays.asList(getContext().getResources().getStringArray(R.array.video_type_name));
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(VideoListFragment.newInstance(Constant.VIDEO_TJ));
@@ -64,17 +69,26 @@ public class VideoFragment extends BaseFragment implements ViewPager.OnPageChang
     }
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
-    @Override
-    public void onPageSelected(int position) {}
-    @Override
-    public void onPageScrollStateChanged(int state) {}
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
 
     @Override
-    public void showLoading(String title) {}
-    @Override
-    public void stopLoading() {}
-    @Override
-    public void showErrorTip(String msg) {}
+    public void onPageSelected(int position) {
+    }
 
+    @Override
+    public void onPageScrollStateChanged(int state) {
+    }
+
+    @Override
+    public void showLoading(String title) {
+    }
+
+    @Override
+    public void stopLoading() {
+    }
+
+    @Override
+    public void showErrorTip(String msg) {
+    }
 }

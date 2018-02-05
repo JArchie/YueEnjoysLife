@@ -1,5 +1,10 @@
 package com.jarchie.yue.utils;
 
+import android.app.Activity;
+import android.content.Context;
+import android.view.KeyEvent;
+import android.webkit.WebView;
+
 import com.coder.zzq.smartshow.toast.SmartToast;
 import com.jarchie.common.utils.ActivityManager;
 import com.jarchie.common.utils.BackHandlerHelper;
@@ -27,6 +32,26 @@ public class CommonUtils {
                 //结束进程
                 android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(0);
+            }
+        }
+    }
+
+    //自定义方法处理WebView的返回键，每次返回上一级页面
+    public static void backPreviousPage(Context context, int flag, int keyCode, WebView webView) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            switch (flag) {
+                case Constant.BACK_PREVIOUS_ACTIVITY:
+                    if (webView.canGoBack()) {
+                        webView.goBack();//返回上一页面
+                    } else {
+                        ((Activity) context).finish();
+                    }
+                    break;
+                case Constant.BACK_PREVIOUS_FRAGMENT:
+                    if (webView.canGoBack()) {
+                        webView.goBack();//返回上一页面
+                    }
+                    break;
             }
         }
     }
