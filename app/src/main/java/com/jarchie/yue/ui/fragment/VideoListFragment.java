@@ -11,8 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
 import android.view.View;
 import android.view.Window;
-
-import com.coder.zzq.smartshow.toast.SmartToast;
 import com.jarchie.common.base.BaseFragment;
 import com.jarchie.common.base.BasePresenter;
 import com.jarchie.common.utils.BackHandlerHelper;
@@ -169,7 +167,6 @@ public class VideoListFragment extends BaseFragment implements OnRefreshListener
 
     @Override
     public boolean onBackPressed() {
-        SmartToast.showInCenter("监听到了");
         if (StandardGSYVideoPlayer.backFromWindowFull(getContext())) {
             return true;
         } else {

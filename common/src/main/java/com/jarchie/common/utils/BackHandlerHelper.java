@@ -3,6 +3,7 @@ package com.jarchie.common.utils;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
 
@@ -41,6 +42,10 @@ public class BackHandlerHelper {
 
     public static boolean handleBackPress(FragmentActivity fragmentActivity) {
         return handleBackPress(fragmentActivity.getSupportFragmentManager());
+    }
+
+    public static boolean handleBackPress(AppCompatActivity appCompatActivity){
+        return handleBackPress(appCompatActivity.getSupportFragmentManager());
     }
 
     /**

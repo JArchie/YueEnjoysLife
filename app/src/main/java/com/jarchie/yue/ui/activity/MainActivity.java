@@ -1,12 +1,11 @@
 package com.jarchie.yue.ui.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import com.jarchie.common.utils.ActivityManager;
+import com.jarchie.common.base.BaseActivity;
+import com.jarchie.common.base.BasePresenter;
+import com.jarchie.common.utils.BackHandlerHelper;
 import com.jarchie.yue.R;
 import com.jarchie.yue.ui.fragment.GirlFragment;
 import com.jarchie.yue.ui.fragment.AssistantFragment;
@@ -16,34 +15,34 @@ import com.jarchie.yue.utils.CommonUtils;
 import com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationItem;
 import com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView;
 import com.luseen.luseenbottomnavigation.BottomNavigation.OnBottomNavigationItemClickListener;
-
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Jarchie on 2018\1\24.
  * 项目主页Activity
  */
-public class MainActivity extends AppCompatActivity implements OnBottomNavigationItemClickListener {
+public class MainActivity extends BaseActivity implements OnBottomNavigationItemClickListener {
 
     @Bind(R.id.navigation_view)
     BottomNavigationView mNavigationView;
     private Fragment newsFragment, girlFragment, videoFragment, assistantFragment;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ActivityManager.getInstance().addActivity(this);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        initListener();
-        initData();
+    public int getLayoutId() {
+        return R.layout.activity_main;
     }
 
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
     public void initListener() {
         mNavigationView.setOnBottomNavigationItemClickListener(this);
     }
 
+    @Override
     public void initData() {
         initNavigationView();
         mNavigationView.selectTab(0);
@@ -145,14 +144,20 @@ public class MainActivity extends AppCompatActivity implements OnBottomNavigatio
 
     @Override
     public void onBackPressed() {
-        CommonUtils.exitApp(this);
+        if(!BackHandlerHelper.handleBackPress(this)){
+            CommonUtils.exitApp(this);
+        }
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
-        ActivityManager.getInstance().removeActivity(this);
+    public void showLoading(String title) {
     }
 
+    @Override
+    public void stopLoading() {
+    }
+
+    @Override
+    public void showErrorTip(String msg) {
+    }
 }
