@@ -144,6 +144,7 @@ public class VideoListFragment extends BaseFragment implements OnRefreshListener
         flag = true;
         mList.clear();
         resolveData(0,10);
+        mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishRefresh();
     }
 
@@ -151,6 +152,7 @@ public class VideoListFragment extends BaseFragment implements OnRefreshListener
     public void onLoadmore(RefreshLayout refreshlayout) {
         resolveData(10,20);
         flag = false;
+        mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishLoadmore();
     }
 

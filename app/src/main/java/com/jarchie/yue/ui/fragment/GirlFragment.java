@@ -106,6 +106,7 @@ public class GirlFragment extends BaseFragment<GirlContract.presenter> implement
     public void onRefresh(RefreshLayout refreshlayout) { //刷新数据
         mList.clear();
         mPresenter.requestGirlData(getContext(), Constant.PAGE_SIZE, Constant.PAGE_NUM);
+        mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishRefresh();
     }
 

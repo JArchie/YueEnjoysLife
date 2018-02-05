@@ -19,6 +19,7 @@ public class Constant {
 
     //每页数量
     public static final int PAGE_SIZE = 10;
+    public static final int PAGE_COUNT = 20;
 
     //新闻类型标识
     public static final String CHANNEL = "channel";
@@ -113,7 +114,7 @@ public class Constant {
     private static List<String> mUrls = new ArrayList<>();
     private static List<String> mFmImgs = new ArrayList<>();
 
-    public static List<String> getTJTitles(){ //推荐标题
+    public static List<String> getTJTitles() { //推荐标题
         mTitles.add(TJ_TITLE_01);
         mTitles.add(TJ_TITLE_02);
         mTitles.add(TJ_TITLE_03);
@@ -137,7 +138,7 @@ public class Constant {
         return mTitles;
     }
 
-    public static List<String> getTJUrls(){ //推荐地址
+    public static List<String> getTJUrls() { //推荐地址
         mUrls.add(TJ_URL_01);
         mUrls.add(TJ_URL_02);
         mUrls.add(TJ_URL_03);
@@ -161,7 +162,7 @@ public class Constant {
         return mUrls;
     }
 
-    public static List<String> getTJFmImgs(){ //推荐封面
+    public static List<String> getTJFmImgs() { //推荐封面
         mFmImgs.add(TJ_FMIMG_01);
         mFmImgs.add(TJ_FMIMG_02);
         mFmImgs.add(TJ_FMIMG_03);
@@ -254,7 +255,7 @@ public class Constant {
     private static List<String> mSPUrls = new ArrayList<>();
     private static List<String> mSPFmImgs = new ArrayList<>();
 
-    public static List<String> getSPTitles(){ //视频标题
+    public static List<String> getSPTitles() { //视频标题
         mSPTitles.add(SP_TITLE_01);
         mSPTitles.add(SP_TITLE_02);
         mSPTitles.add(SP_TITLE_03);
@@ -278,7 +279,7 @@ public class Constant {
         return mSPTitles;
     }
 
-    public static List<String> getSPUrls(){ //视频地址
+    public static List<String> getSPUrls() { //视频地址
         mSPUrls.add(SP_URL_01);
         mSPUrls.add(SP_URL_02);
         mSPUrls.add(SP_URL_03);
@@ -302,7 +303,7 @@ public class Constant {
         return mSPUrls;
     }
 
-    public static List<String> getSPFmImgs(){ //视频封面
+    public static List<String> getSPFmImgs() { //视频封面
         mSPFmImgs.add(SP_FMIMG_01);
         mSPFmImgs.add(SP_FMIMG_02);
         mSPFmImgs.add(SP_FMIMG_03);

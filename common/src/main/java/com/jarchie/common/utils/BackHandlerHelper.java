@@ -3,18 +3,24 @@ package com.jarchie.common.utils;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
 
 /**
- * Created by Jianqi on 2017\11\21.
+ * Created by Jarchie on 2017\11\21.
  * 描述：将back事件分发给 FragmentManager 中管理的子Fragment，如果该 FragmentManager 中的所有Fragment都
  * 没有处理back事件，则尝试 FragmentManager.popBackStack()
  *
- * @return 如果处理了back键则返回 <b>true</b>
- * @see # handleBackPress(Fragment)
- * @see # handleBackPress(FragmentActivity)
+ * 如果处理了back键则返回 true
+ * handleBackPress(Fragment)
+ * handleBackPress(FragmentActivity)
+ * handleBackPress(AppCompatActivity)
+ * handleBackPress(ViewPager)
  */
 
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -46,6 +52,26 @@ public class BackHandlerHelper {
 
     public static boolean handleBackPress(AppCompatActivity appCompatActivity){
         return handleBackPress(appCompatActivity.getSupportFragmentManager());
+    }
+
+    //将back事件分发给ViewPager中的Fragment
+    public static boolean handleBackPress(ViewPager viewPager) {
+        if (viewPager == null) return false;
+
+        PagerAdapter adapter = viewPager.getAdapter();
+
+        if (adapter == null) return false;
+
+        int currentItem = viewPager.getCurrentItem();
+        Fragment fragment;
+        if (adapter instanceof FragmentPagerAdapter) {
+            fragment = ((FragmentPagerAdapter) adapter).getItem(currentItem);
+        } else if (adapter instanceof FragmentStatePagerAdapter) {
+            fragment = ((FragmentStatePagerAdapter) adapter).getItem(currentItem);
+        } else {
+            fragment = null;
+        }
+        return isFragmentBackHandled(fragment);
     }
 
     /**
