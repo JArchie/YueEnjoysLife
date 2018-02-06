@@ -16,4 +16,5 @@
     <color name="color_999">#999999</color>
     <color name="toast_stroke_gray">#99d4d4d4</color>
     <color name="iv_logo_border">#e7299b</color>
+    <color name="list_border">#D6D6D6</color>
 </resources>

@@ -1,67 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/jokes_list_card_view"
-    app:cardElevation="2dp"
-    app:cardCornerRadius="5dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/layout_bg"
+    android:orientation="vertical">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/rl_root"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_fff">
+        android:background="@color/color_fff"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
 
-        <TextView
-            android:id="@+id/mContent"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="@color/color_333"
+                tools:text="标题" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <com.jarchie.common.glide.GlideImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    app:siv_border_color="@color/iv_logo_border"
+                    app:siv_border_width="1dp"
+                    app:siv_shape_type="circle" />
+
+                <TextView
+                    android:id="@+id/tv_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/video_from"
+                    android:textColor="@color/color_main"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_play_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/happy_time"
+                    android:textColor="@color/color_main"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/img_layout"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:gravity="right|center_vertical"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/rotate_view"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/adapter_parent_down" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/under_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:alpha="0"
+        android:layout_marginBottom="5dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_999" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_333"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:lineSpacingExtra="5dp"
-            android:gravity="center_vertical"/>
+            android:orientation="horizontal"
+            android:layout_marginLeft="5dp">
 
-        <com.jarchie.common.glide.GlideImageView
-            android:id="@+id/iv_logo"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/mContent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginRight="2dp"
-            app:siv_border_color="@color/iv_logo_border"
-            app:siv_border_width="1dp"
-            app:siv_shape_type="circle"/>
+            <com.jarchie.common.glide.GlideImageView
+                android:id="@+id/comment_logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                app:siv_border_color="@color/iv_logo_border"
+                app:siv_border_width="1dp"
+                app:siv_shape_type="circle" />
 
-        <TextView
-            android:id="@+id/tv_from"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/iv_logo"
-            android:layout_alignTop="@+id/iv_logo"
-            android:layout_toRightOf="@+id/iv_logo"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:textColor="@color/color_main"
-            android:textSize="15sp"
-            android:text="@string/video_from" />
+            <LinearLayout
+                android:id="@+id/comment_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_play_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/iv_logo"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/iv_logo"
-            android:layout_below="@+id/mContent"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:padding="5dp"
-            android:textColor="@color/color_main"
-            android:textSize="14sp"
-            android:text="@string/happy_time" />
-    </RelativeLayout>
-</android.support.v7.widget.CardView>
+                <TextView
+                    android:id="@+id/comment_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/video_from"
+                    android:textColor="@color/color_666"
+                    android:textSize="14sp"
+                    android:lines="1"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:id="@+id/comment_uname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/color_777"
+                    android:textSize="13sp"
+                    tools:text="@string/happy_time"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

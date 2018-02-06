@@ -2,15 +2,12 @@ package com.jarchie.yue.mvp.presenter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
-
 import com.jarchie.common.base.impl.BasePresenterImpl;
 import com.jarchie.yue.R;
 import com.jarchie.yue.api.Api;
 import com.jarchie.yue.constant.HostType;
 import com.jarchie.yue.mvp.contract.JokesContract;
 import com.jarchie.yue.mvp.model.JokesBean;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +33,9 @@ public class JokesPresenter extends BasePresenterImpl<JokesContract.View> implem
                     if (response.body() != null) {
                         view.setData(response.body());
                         view.stopLoading();
+                    }else {
+                        view.stopLoading();
+                        view.showErrorTip("当前暂无数据，请稍后再试");
                     }
                 }
             }
@@ -44,7 +44,6 @@ public class JokesPresenter extends BasePresenterImpl<JokesContract.View> implem
             public void onFailure(@NonNull Call<JokesBean> call, @NonNull Throwable t) {
                 view.stopLoading();
                 view.showErrorTip(t.getMessage());
-                Log.e("段子报错啦------》",t.getMessage());
             }
         });
     }

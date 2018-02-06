@@ -35,6 +35,8 @@ public class VideoNormalHolder extends RecyclerItemBaseHolder {
     TextView tvFrom;
     @Bind(R.id.tv_play_time)
     TextView tvPlayTime;
+    @Bind(R.id.tv_title)
+    TextView tvTitle;
 
     private Context mContext;
     private ImageView imageView;
@@ -48,7 +50,8 @@ public class VideoNormalHolder extends RecyclerItemBaseHolder {
         gsyVideoOptionBuilder = new GSYVideoOptionBuilder();
     }
 
-    public void onBind(int position, VideoBean bean,String mType) {
+    @SuppressWarnings("UnusedParameters")
+    public void onBind(int position, VideoBean bean, String mType) {
         //增加封面
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         String url = "",title = "";
@@ -61,7 +64,7 @@ public class VideoNormalHolder extends RecyclerItemBaseHolder {
             url = Constant.getSPUrls().get(position);
             title = Constant.getSPTitles().get(position);
         }
-
+        tvTitle.setText(title);
         if (imageView.getParent() != null) {
             ViewGroup viewGroup = (ViewGroup) imageView.getParent();
             viewGroup.removeView(imageView);

@@ -8,13 +8,23 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rl_root"
         android:layout_width="match_parent"
-        android:layout_height="210dp"
+        android:layout_height="wrap_content"
         android:background="@color/color_fff">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textColor="@color/color_333"
+            android:textSize="15sp"
+            android:text="@string/video_from" />
 
         <com.jarchie.yue.ui.widget.CustomCoverVideo
             android:id="@+id/videoplayer"
             android:layout_width="match_parent"
-            android:layout_height="160dp" />
+            android:layout_height="160dp"
+            android:layout_below="@+id/tv_title"/>
 
         <com.jarchie.common.glide.GlideImageView
             android:id="@+id/iv_logo"
