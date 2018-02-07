@@ -2,6 +2,7 @@ package com.jarchie.yue.ui.activity;
 
 import android.content.Intent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -113,6 +114,13 @@ public class NewsDetailActivity extends BaseActivity implements OnRefreshListene
                 stopLoading();
             }
         }
+    }
+
+    @Override
+    public void finish() { //防止WebView的ZoomButton引起的内存泄漏
+        ViewGroup viewGroup = (ViewGroup) getWindow().getDecorView();
+        viewGroup.removeAllViews();
+        super.finish();
     }
 
     @Override
