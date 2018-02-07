@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.jarchie.common.glide.GlideImageView;
 import com.jarchie.yue.R;
 import com.jarchie.yue.mvp.model.NewsBean;
-import com.jarchie.yue.ui.activity.WechatDetailActivity;
+import com.jarchie.yue.ui.activity.NewsDetailActivity;
 
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, WechatDetailActivity.class);
+                Intent intent = new Intent(mContext, NewsDetailActivity.class);
                 intent.putExtra("url", mList.get(position).getUrl());
                 mContext.startActivity(intent);
             }

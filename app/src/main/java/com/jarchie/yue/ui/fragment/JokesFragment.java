@@ -4,6 +4,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import com.jarchie.common.base.BaseFragment;
 import com.jarchie.common.widget.LoadingTip;
 import com.jarchie.common.widget.RefreshInitView;
@@ -19,8 +20,10 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.Bind;
 
 /**
@@ -68,7 +71,8 @@ public class JokesFragment extends BaseFragment<JokesContract.presenter> impleme
         mNewsRecycle.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new JokesListAdapter(getContext(), mList);
         mNewsRecycle.setAdapter(mAdapter);
-        mPresenter.requestJokesListData(getContext(), Constant.VIDEO_JOKES, Constant.PAGE_COUNT);
+        if (mPresenter != null)
+            mPresenter.requestJokesListData(getContext(), Constant.VIDEO_JOKES, Constant.PAGE_COUNT);
     }
 
     @Override
@@ -80,6 +84,9 @@ public class JokesFragment extends BaseFragment<JokesContract.presenter> impleme
     @Override
     public void onRefresh(RefreshLayout refreshlayout) { //刷新数据
         mList.clear();
+        if (mPresenter == null){
+            mPresenter = new JokesPresenter(this);
+        }
         mPresenter.requestJokesListData(getContext(), Constant.VIDEO_JOKES, Constant.PAGE_COUNT);
         mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishRefresh();

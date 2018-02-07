@@ -6,6 +6,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.jarchie.common.base.BaseFragment;
@@ -26,8 +27,10 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.Bind;
 
 /**
@@ -82,7 +85,8 @@ public class GirlFragment extends BaseFragment<GirlContract.presenter> implement
         mGirlRecycle.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new GirlAdapter(getContext(), mList);
         mGirlRecycle.setAdapter(mAdapter);
-        mPresenter.requestGirlData(getContext(), Constant.PAGE_SIZE, pageNum);
+        if (mPresenter != null)
+            mPresenter.requestGirlData(getContext(), Constant.PAGE_SIZE, pageNum);
         mCommonDialog = new CommonDialog(getContext(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, R.layout.dialog_girl, Gravity.CENTER);
         mPhotoView = mCommonDialog.findViewById(R.id.dialog_photo);
     }
@@ -103,6 +107,8 @@ public class GirlFragment extends BaseFragment<GirlContract.presenter> implement
     @Override
     public void onRefresh(RefreshLayout refreshlayout) { //刷新数据
         mList.clear();
+        if (mPresenter == null)
+            mPresenter = new GirlPresenter(this);
         mPresenter.requestGirlData(getContext(), Constant.PAGE_SIZE, Constant.PAGE_NUM);
         mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishRefresh();
@@ -110,6 +116,8 @@ public class GirlFragment extends BaseFragment<GirlContract.presenter> implement
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) { //加载数据
+        if (mPresenter == null)
+            mPresenter = new GirlPresenter(this);
         mPresenter.requestGirlData(getContext(), Constant.PAGE_SIZE, ++pageNum);
         mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishLoadmore();

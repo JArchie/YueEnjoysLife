@@ -1,15 +1,15 @@
 package com.jarchie.yue.ui.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import com.jarchie.common.utils.ActivityManager;
+
+import com.jarchie.common.base.BaseActivity;
+import com.jarchie.common.base.BasePresenter;
 import com.jarchie.common.widget.LoadingTip;
 import com.jarchie.common.widget.RefreshInitView;
 import com.jarchie.yue.R;
@@ -18,10 +18,10 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
-public class WechatDetailActivity extends AppCompatActivity implements OnRefreshListener {
+import butterknife.Bind;
+
+public class NewsDetailActivity extends BaseActivity implements OnRefreshListener {
 
     @Bind(R.id.mWebView)
     WebView mWebView;
@@ -36,27 +36,29 @@ public class WechatDetailActivity extends AppCompatActivity implements OnRefresh
     private String url;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wechat_detail);
-        ButterKnife.bind(this);
-        ActivityManager.getInstance().addActivity(this);
-        initListener();
-        initData();
+    public int getLayoutId() {
+        return R.layout.activity_wechat_detail;
     }
 
-    private void initListener() {
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initListener() {
         mRefreshLayout.setOnRefreshListener(this);
         RefreshInitView.initView(mRefreshLayout);
         mToolbar.setLeftBtnListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                NewsDetailActivity.this.finish();
             }
         });
     }
 
-    private void initData() {
+    @Override
+    public void initData() {
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
         mToolbar.setTitle("新闻详情");
@@ -81,7 +83,7 @@ public class WechatDetailActivity extends AppCompatActivity implements OnRefresh
 
     //加载显示
     private void loadingPage(final String mUrl) {
-        showLoading();
+        showLoading("");
         //加载网页
         mWebView.loadUrl(mUrl);
         //本地显示
@@ -95,7 +97,7 @@ public class WechatDetailActivity extends AppCompatActivity implements OnRefresh
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
-                showErrorTip();
+                showErrorTip("");
             }
         });
     }
@@ -115,28 +117,25 @@ public class WechatDetailActivity extends AppCompatActivity implements OnRefresh
 
     @Override
     public void onBackPressed() {
-        finish();
+        NewsDetailActivity.this.finish();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ActivityManager.getInstance().removeActivity(this);
-    }
-
-    public void showLoading() {
+    public void showLoading(String title) {
         mWebView.setVisibility(View.GONE);
         mHeader.setVisibility(View.GONE);
         mLoadedTip.setLoadingTip(LoadingTip.LoadStatus.loading);
     }
 
+    @Override
     public void stopLoading() {
         mLoadedTip.setLoadingTip(LoadingTip.LoadStatus.finish);
         mWebView.setVisibility(View.VISIBLE);
         mHeader.setVisibility(View.VISIBLE);
     }
 
-    public void showErrorTip() {
+    @Override
+    public void showErrorTip(String msg) {
         mWebView.setVisibility(View.GONE);
         mHeader.setVisibility(View.GONE);
         mLoadedTip.setLoadingTip(LoadingTip.LoadStatus.error);

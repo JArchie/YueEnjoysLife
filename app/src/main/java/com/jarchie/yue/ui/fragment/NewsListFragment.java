@@ -77,7 +77,8 @@ public class NewsListFragment extends BaseFragment<NewsListContract.presenter> i
         mNewsRecycle.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new NewsListAdapter(getContext(), mList);
         mNewsRecycle.setAdapter(mAdapter);
-        mPresenter.requestNewsListData(getContext(), channel, Constant.PAGE_START, Constant.PAGE_SIZE, Constant.NEWS_KEY);
+        if (mPresenter != null)
+            mPresenter.requestNewsListData(getContext(), channel, Constant.PAGE_START, Constant.PAGE_SIZE, Constant.NEWS_KEY);
     }
 
     @Override
@@ -89,6 +90,8 @@ public class NewsListFragment extends BaseFragment<NewsListContract.presenter> i
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         mList.clear();
+        if (mPresenter == null)
+            mPresenter = new NewsListPresenter(this);
         mPresenter.requestNewsListData(getContext(), channel, Constant.PAGE_START, Constant.PAGE_SIZE, Constant.NEWS_KEY);
         mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishRefresh();
@@ -96,6 +99,8 @@ public class NewsListFragment extends BaseFragment<NewsListContract.presenter> i
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
+        if (mPresenter == null)
+            mPresenter = new NewsListPresenter(this);
         mPresenter.requestNewsListData(getContext(), channel, ++pageNum, Constant.PAGE_SIZE, Constant.NEWS_KEY);
         mAdapter.notifyDataSetChanged();
         mRefreshLayout.finishLoadmore();

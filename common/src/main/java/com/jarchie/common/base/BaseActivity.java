@@ -30,7 +30,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         isConfigChange = false;
         ActivityManager.getInstance().addActivity(this);
         setStatusBarColor();
-        setContentView(getLayoutId());
+        if (getLayoutId()!=0){
+            setContentView(getLayoutId());
+        }
         ButterKnife.bind(this);
         mContext = this;
         mPresenter = initPresenter();
