@@ -37,6 +37,9 @@ public class Constant {
     //新闻appkey
     public static final String NEWS_KEY = "a17c04f329d9d88f";
 
+    //归属地查询的appkey
+    public static final String BELONG_KEY = "d52f788787f7e1fa0dd7c5b23f0c9f49";
+
     //处理Activity和Fragment中的WebView返回键
     public static final int BACK_PREVIOUS_ACTIVITY = 1;
     public static final int BACK_PREVIOUS_FRAGMENT = 2;

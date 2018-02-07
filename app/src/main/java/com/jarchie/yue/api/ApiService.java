@@ -1,5 +1,6 @@
 package com.jarchie.yue.api;
 
+import com.jarchie.yue.bean.BelongBean;
 import com.jarchie.yue.mvp.model.GirlBean;
 import com.jarchie.yue.mvp.model.JokesBean;
 import com.jarchie.yue.mvp.model.NewsBean;
@@ -35,5 +36,9 @@ public interface ApiService {
     //段子接口
     @GET("neihan/stream/mix/v1")
     Call<JokesBean> requestJokesListData(@Query("content_type") String content_type, @Query("count") int count);
+
+    //归属地查询
+    @GET("mobile/get")
+    Call<BelongBean> requestBelongData(@Query("phone") String phone, @Query("key") String key);
 
 }
