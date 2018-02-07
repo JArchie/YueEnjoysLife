@@ -53,7 +53,7 @@
                     android:id="@+id/mWaveView"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp" />
 
                 <!--<com.jarchie.yue.ui.widget.WaveView
                     android:id="@+id/mWaveView"
@@ -61,6 +61,217 @@
                     android:layout_height="50dp"
                     android:layout_gravity="bottom"/>-->
             </LinearLayout>
+
+            <!--扫一扫-->
+            <LinearLayout
+                android:id="@+id/mScanLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@color/color_fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/saoyisao" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/saoyisao"
+                    android:textColor="@color/color_333"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <!--聊一聊-->
+            <LinearLayout
+                android:id="@+id/mChatLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginTop="0.5dp"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/chat" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/chat"
+                    android:textColor="@color/color_333"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <!--我的位置-->
+            <LinearLayout
+                android:id="@+id/mLocationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/location" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/my_location"
+                    android:textColor="@color/color_333"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <!--归属地查询-->
+            <LinearLayout
+                android:id="@+id/mBelongLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/guishudi" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/my_guishudi"
+                    android:textColor="@color/color_333"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <!--快递查询-->
+            <LinearLayout
+                android:id="@+id/mCourierLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginTop="0.5dp"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/kuaidi" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/my_wuliu"
+                    android:textColor="@color/color_333"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <!--关于软件-->
+            <LinearLayout
+                android:id="@+id/mAboutLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@color/color_fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/about" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/my_about"
+                    android:textColor="@color/color_333"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

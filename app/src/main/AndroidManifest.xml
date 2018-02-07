@@ -27,6 +27,12 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.NewsDetailActivity" />
+        <activity android:name=".ui.activity.ScanActivity" />
+        <activity android:name=".ui.activity.ChatActivity" />
+        <activity android:name=".ui.activity.LocationActivity" />
+        <activity android:name=".ui.activity.BelongActivity" />
+        <activity android:name=".ui.activity.CourierActivity" />
+        <activity android:name=".ui.activity.AboutActivity"/>
     </application>
 
 </manifest>

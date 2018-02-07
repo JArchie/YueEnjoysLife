@@ -10,4 +10,10 @@
     <string name="happy_time">内涵的不只是段子哦</string>
     <string name="video_play_times">%1$s次播放</string>
     <string name="user_desc">还是很美的</string>
+    <string name="saoyisao">扫一扫</string>
+    <string name="chat">聊一聊</string>
+    <string name="my_location">我的位置</string>
+    <string name="my_guishudi">归属地查询</string>
+    <string name="my_wuliu">快递查询</string>
+    <string name="my_about">关于软件</string>
 </resources>
