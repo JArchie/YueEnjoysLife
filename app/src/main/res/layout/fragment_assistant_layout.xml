@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/list_bg"
     android:orientation="vertical">
 
     <com.jarchie.yue.ui.widget.CustomToolBar
@@ -9,6 +11,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_main"
-        android:minHeight="?attr/actionBarSize"/>
+        android:minHeight="?attr/actionBarSize" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--头部内容-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_main"
+                android:orientation="vertical">
+
+                <com.jarchie.common.glide.GlideImageView
+                    android:id="@+id/user_logo"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    app:siv_border_color="@color/color_fff"
+                    app:siv_border_width="2dp"
+                    app:siv_shape_type="circle" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="@string/user_desc"
+                    android:textColor="@color/color_fff"
+                    android:textSize="16sp" />
+
+                <com.jarchie.yue.ui.widget.WaveViewByBezier
+                    android:id="@+id/mWaveView"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"/>
+
+                <!--<com.jarchie.yue.ui.widget.WaveView
+                    android:id="@+id/mWaveView"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"/>-->
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

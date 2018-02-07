@@ -20,7 +20,7 @@ import butterknife.Bind;
 
 /**
  * Created by Jarchie on 2018\1\24.
- * 视频Fragment
+ * 视频Fragment https://github.com/jokermonn/-Api/blob/master/Neihan.md#video_show
  */
 
 public class VideoFragment extends BaseFragment implements ViewPager.OnPageChangeListener {
