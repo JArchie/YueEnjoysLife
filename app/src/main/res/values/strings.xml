@@ -29,4 +29,8 @@
     <string name="num9">9</string>
     <string name="numdel">DEL</string>
     <string name="numselect">查询</string>
+    <string name="com_select">请选择快递公司</string>
+    <string name="hint_kuaidi">请输入快递单号</string>
+    <string name="query">查询</string>
+    <string name="logistics">物流查询</string>
 </resources>

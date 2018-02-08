@@ -8,7 +8,7 @@ package com.jarchie.yue.constant;
 public class HostType {
 
     //多少种Host类型
-    public static final int TYPE_COUNT = 4;
+    public static final int TYPE_COUNT = 5;
 
     //内涵段子的host
     public static final int NEIHAN_VIDEO = 1;
@@ -19,7 +19,10 @@ public class HostType {
     //极速数据的host
     public static final int NEWS_LIST = 3;
 
-    //聚合数据的host
+    //归属地查询的host
     public static final int JUHE_HOST = 4;
+
+    //快递查询的host
+    public static final int KUAIDI_HOST = 5;
 
 }

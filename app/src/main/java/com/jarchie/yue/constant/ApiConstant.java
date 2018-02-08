@@ -13,6 +13,7 @@ public class ApiConstant {
     public static final String SINA_PHOTO_HOST = "http://gank.io/api/";
     public static final String NEWS_URL = "http://api.jisuapi.com/";
     public static final String JUHE_URL = "http://apis.juhe.cn/";
+    public static final String KUAIDI_URL = "http://v.juhe.cn/";
 
     //获取域名服务器地址
     public static String getHost(int hostType) {
@@ -29,6 +30,9 @@ public class ApiConstant {
                 break;
             case HostType.JUHE_HOST:
                 host = JUHE_URL;
+                break;
+            case HostType.KUAIDI_HOST:
+                host = KUAIDI_URL;
                 break;
             default:
                 host = "";

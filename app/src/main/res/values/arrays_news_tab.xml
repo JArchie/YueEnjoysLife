@@ -17,4 +17,63 @@
         <item>段子</item>
     </string-array>
 
+    <string-array name="kuaidi_list">
+        <item>顺丰</item>
+        <item>申通</item>
+        <item>圆通</item>
+        <item>韵达</item>
+        <item>天天</item>
+        <item>EMS</item>
+        <item>中通</item>
+        <item>汇通</item>
+        <item>全峰</item>
+        <item>德邦</item>
+        <item>国通</item>
+        <item>如风达</item>
+        <item>京东快递</item>
+        <item>宅急送</item>
+        <item>EMS国际</item>
+        <item>Fedex国际</item>
+        <item>邮政国内（挂号信）</item>
+        <item>UPS国际快递</item>
+        <item>中铁快运</item>
+        <item>佳吉快运</item>
+        <item>速尔快递</item>
+        <item>信丰物流</item>
+        <item>优速快递</item>
+        <item>中邮物流</item>
+        <item>天地华宇</item>
+        <item>安信达快递</item>
+        <item>快捷速递</item>
+    </string-array>
+
+    <string-array name="kuaidi_num_list">
+        <item>sf</item>
+        <item>sto</item>
+        <item>yt</item>
+        <item>yd</item>
+        <item>tt</item>
+        <item>ems</item>
+        <item>zto</item>
+        <item>ht</item>
+        <item>qf</item>
+        <item>db</item>
+        <item>gt</item>
+        <item>rfd</item>
+        <item>jd</item>
+        <item>zjs</item>
+        <item>emsg</item>
+        <item>fedex</item>
+        <item>yzgn</item>
+        <item>ups</item>
+        <item>ztky</item>
+        <item>jiaji</item>
+        <item>suer</item>
+        <item>xfwl</item>
+        <item>yousu</item>
+        <item>zhongyou</item>
+        <item>tdhy</item>
+        <item>axd</item>
+        <item>kuaijie</item>
+    </string-array>
 </resources>

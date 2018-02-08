@@ -40,6 +40,9 @@ public class Constant {
     //归属地查询的appkey
     public static final String BELONG_KEY = "d52f788787f7e1fa0dd7c5b23f0c9f49";
 
+    //快递查询的appkey
+    public static final String COURIER_KEY = "02a4457ec8d1fce11bdb9b35ec569680";
+
     //处理Activity和Fragment中的WebView返回键
     public static final int BACK_PREVIOUS_ACTIVITY = 1;
     public static final int BACK_PREVIOUS_FRAGMENT = 2;

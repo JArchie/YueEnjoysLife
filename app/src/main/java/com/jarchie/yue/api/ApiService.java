@@ -1,11 +1,16 @@
 package com.jarchie.yue.api;
 
 import com.jarchie.yue.bean.BelongBean;
+import com.jarchie.yue.bean.CourierBean;
 import com.jarchie.yue.mvp.model.GirlBean;
 import com.jarchie.yue.mvp.model.JokesBean;
 import com.jarchie.yue.mvp.model.NewsBean;
+
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -40,5 +45,10 @@ public interface ApiService {
     //归属地查询
     @GET("mobile/get")
     Call<BelongBean> requestBelongData(@Query("phone") String phone, @Query("key") String key);
+
+    //快递查询
+    @FormUrlEncoded
+    @POST("exp/index")
+    Call<CourierBean> requestCourierData(@FieldMap Map<String,Object> map);
 
 }
