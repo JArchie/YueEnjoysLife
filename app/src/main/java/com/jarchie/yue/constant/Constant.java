@@ -43,6 +43,14 @@ public class Constant {
     //快递查询的appkey
     public static final String COURIER_KEY = "02a4457ec8d1fce11bdb9b35ec569680";
 
+    //博客、GitHub标志
+    public static final String BLOG_FLAG = "blog";
+    public static final String GITHUB_FLAG = "github";
+
+    //博客、Github地址
+    public static final String BLOG_URL = "http://blog.csdn.net/jarchie520";
+    public static final String GITHUB_URL = "https://github.com/JArchie";
+
     //处理Activity和Fragment中的WebView返回键
     public static final int BACK_PREVIOUS_ACTIVITY = 1;
     public static final int BACK_PREVIOUS_FRAGMENT = 2;

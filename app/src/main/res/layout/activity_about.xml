@@ -1,12 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
     <com.jarchie.yue.ui.widget.CustomToolBar
         android:id="@+id/mToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_main"
         android:minHeight="?attr/actionBarSize" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/icon" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="@string/about_soft"
+        android:textColor="@color/color_main"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/mBlogTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/layout_bg"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/blog"
+        android:textColor="@color/color_333" />
+
+    <TextView
+        android:id="@+id/mGithubTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/layout_bg"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/github"
+        android:textColor="@color/color_333" />
 </LinearLayout>

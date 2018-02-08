@@ -33,4 +33,7 @@
     <string name="hint_kuaidi">请输入快递单号</string>
     <string name="query">查询</string>
     <string name="logistics">物流查询</string>
+    <string name="about_soft">悦享生活  V1.0.0</string>
+    <string name="blog">个人博客：http://blog.csdn.net/jarchie520</string>
+    <string name="github">个人GitHub：https://github.com/JArchie</string>
 </resources>
