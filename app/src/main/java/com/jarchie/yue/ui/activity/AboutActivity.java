@@ -81,10 +81,8 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     public void showLoading(String title) {}
-
     @Override
     public void stopLoading() {}
-
     @Override
     public void showErrorTip(String msg) {}
 
