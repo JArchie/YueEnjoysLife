@@ -1,6 +1,5 @@
 package com.jarchie.yue.ui.activity;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
@@ -8,22 +7,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.coder.zzq.smartshow.toast.SmartToast;
 import com.jarchie.common.base.BaseActivity;
 import com.jarchie.common.base.BasePresenter;
-import com.jarchie.common.widget.LoadingTip;
 import com.jarchie.yue.R;
 import com.jarchie.yue.api.Api;
 import com.jarchie.yue.bean.BelongBean;
 import com.jarchie.yue.constant.Constant;
 import com.jarchie.yue.constant.HostType;
 import com.jarchie.yue.ui.widget.CustomToolBar;
-
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnLongClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -80,7 +74,13 @@ public class BelongActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        btnDel.setOnLongClickListener(new View.OnLongClickListener() { //长按清除
+            @Override
+            public boolean onLongClick(View view) {
+                etNumber.setText("");
+                return false;
+            }
+        });
     }
 
     @Override
@@ -92,6 +92,8 @@ public class BelongActivity extends BaseActivity {
                 BelongActivity.this.finish();
             }
         });
+        ivCompany.setVisibility(View.GONE);
+        tvResult.setText("欢迎查询您的归属地");
     }
 
     @OnClick({R.id.btn_1, R.id.btn_2, R.id.btn_3, R.id.btn_4, R.id.btn_5, R.id.btn_6, R.id.btn_0,
@@ -134,12 +136,7 @@ public class BelongActivity extends BaseActivity {
         }
     }
 
-    @OnLongClick(R.id.et_number)
-    public boolean onLongClick() {
-        etNumber.setText("");
-        return false;
-    }
-
+    //请求数据
     private void queryData() {
         Api.getDefault(HostType.JUHE_HOST).requestBelongData(str, Constant.BELONG_KEY).enqueue(new Callback<BelongBean>() {
             @SuppressWarnings("ConstantConditions")
@@ -151,8 +148,9 @@ public class BelongActivity extends BaseActivity {
                             BelongBean.ResultBean bean = response.body().getResult();
                             tvResult.setText("归属地:" + bean.getProvince() + bean.getCity() + "\n" +
                                     "区号:" + bean.getAreacode() + "\n" + "邮编:" + bean.getZip() + "\n" +
-                                    "运营商:" + bean.getCompany() + "\n" + "类型:" + bean.getCard());
+                                    "运营商:" + bean.getCompany());
                             //图片显示
+                            ivCompany.setVisibility(View.VISIBLE);
                             switch (bean.getCompany()) {
                                 case "移动":
                                     ivCompany.setImageResource(R.drawable.china_moblie);
@@ -180,14 +178,9 @@ public class BelongActivity extends BaseActivity {
     }
 
     @Override
-    public void showLoading(String title) {
-    }
-
+    public void showLoading(String title) {}
     @Override
-    public void stopLoading() {
-    }
-
+    public void stopLoading() {}
     @Override
-    public void showErrorTip(String msg) {
-    }
+    public void showErrorTip(String msg) {}
 }
