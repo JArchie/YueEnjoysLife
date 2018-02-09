@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <com.jarchie.yue.ui.widget.CustomToolBar
         android:id="@+id/mToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_main"
         android:minHeight="?attr/actionBarSize" />
+
+    <com.jarchie.yue.ui.widget.ScanView
+        android:id="@+id/mScanView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

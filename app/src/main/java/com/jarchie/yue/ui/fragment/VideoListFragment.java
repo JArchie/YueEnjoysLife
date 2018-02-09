@@ -2,15 +2,11 @@ package com.jarchie.yue.ui.fragment;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Explode;
 import android.view.View;
-import android.view.Window;
 import com.jarchie.common.base.BaseFragment;
 import com.jarchie.common.base.BasePresenter;
 import com.jarchie.common.utils.BackHandlerHelper;
@@ -31,10 +27,8 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.Bind;
 
 /**
@@ -63,17 +57,6 @@ public class VideoListFragment extends BaseFragment implements OnRefreshListener
     private LinearLayoutManager linearLayoutManager;
     VideoBaseAdapter recyclerBaseAdapter;
     private boolean flag = true;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // 设置一个exit transition
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getActivity().getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-            getActivity().getWindow().setEnterTransition(new Explode());
-            getActivity().getWindow().setExitTransition(new Explode());
-        }
-    }
 
     @Override
     public int getLayoutId() {

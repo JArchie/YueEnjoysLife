@@ -51,6 +51,10 @@ public class Constant {
     public static final String BLOG_URL = "http://blog.csdn.net/jarchie520";
     public static final String GITHUB_URL = "https://github.com/JArchie";
 
+    //二维码跳转的请求码
+    public static final int REQUEST_SCAN_CODE = 1000;
+    public static final int REQUEST_SCAN_OK = 1001;
+
     //处理Activity和Fragment中的WebView返回键
     public static final int BACK_PREVIOUS_ACTIVITY = 1;
     public static final int BACK_PREVIOUS_FRAGMENT = 2;

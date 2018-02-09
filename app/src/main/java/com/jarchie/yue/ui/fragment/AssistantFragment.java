@@ -1,12 +1,23 @@
 package com.jarchie.yue.ui.fragment;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.widget.LinearLayout;
 
+import com.coder.zzq.smartshow.toast.SmartToast;
 import com.jarchie.common.base.BaseFragment;
 import com.jarchie.common.base.BasePresenter;
 import com.jarchie.common.glide.GlideImageView;
 import com.jarchie.yue.R;
+import com.jarchie.yue.constant.Constant;
 import com.jarchie.yue.ui.activity.AboutActivity;
 import com.jarchie.yue.ui.activity.BelongActivity;
 import com.jarchie.yue.ui.activity.ChatActivity;
@@ -83,7 +94,7 @@ public class AssistantFragment extends BaseFragment {
     public void onClick(LinearLayout layout) {
         switch (layout.getId()) {
             case R.id.mScanLayout: //扫一扫
-                startActivity(new Intent(getContext(), ScanActivity.class));
+                requestCameraPermission();
                 break;
             case R.id.mChatLayout: //聊一聊
                 startActivity(new Intent(getContext(), ChatActivity.class));
@@ -101,6 +112,67 @@ public class AssistantFragment extends BaseFragment {
                 startActivity(new Intent(getContext(), AboutActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constant.REQUEST_SCAN_CODE) {
+            if (resultCode == Constant.REQUEST_SCAN_OK) {
+                Bundle bundle = data.getExtras();
+                SmartToast.showInCenter(bundle.getString("SCAN_RESULT"));
+            }
+        }
+    }
+
+    //申请相机权限
+    private void requestCameraPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                    showPermissionDialog();
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 1);
+                }
+            } else {
+                startActivityForResult(new Intent(getContext(), ScanActivity.class), Constant.REQUEST_SCAN_CODE);
+            }
+        } else {
+            startActivityForResult(new Intent(getContext(), ScanActivity.class), Constant.REQUEST_SCAN_CODE);
+        }
+    }
+
+    //权限申请的回调处理
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startActivityForResult(new Intent(getContext(), ScanActivity.class), Constant.REQUEST_SCAN_CODE);
+                } else {
+                    SmartToast.showLongInCenter("您拒绝了此权限！使用此功能需要允许使用该权限！");
+                }
+                break;
+        }
+    }
+
+    //弹出Dialog
+    private void showPermissionDialog() {
+        new AlertDialog.Builder(getContext())
+                .setPositiveButton("允许", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 1);
+                    }
+                })
+                .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .setCancelable(false)
+                .setMessage("您允许悦享生活使用相机功能吗？")
+                .show();
     }
 
     @Override
