@@ -55,6 +55,10 @@ public class Constant {
     public static final int REQUEST_SCAN_CODE = 1000;
     public static final int REQUEST_SCAN_OK = 1001;
 
+    //权限申请标志位
+    public static final String REQUEST_FLAG_CAMERA = "camera";
+    public static final String REQUEST_FLAG_LOCATION = "location";
+
     //处理Activity和Fragment中的WebView返回键
     public static final int BACK_PREVIOUS_ACTIVITY = 1;
     public static final int BACK_PREVIOUS_FRAGMENT = 2;

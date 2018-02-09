@@ -91,13 +91,13 @@ public class AssistantFragment extends BaseFragment {
     public void onClick(LinearLayout layout) {
         switch (layout.getId()) {
             case R.id.mScanLayout: //扫一扫
-                requestCameraPermission();
+                requestPermissions(Constant.REQUEST_FLAG_CAMERA);
                 break;
             case R.id.mChatLayout: //聊一聊
                 startActivity(new Intent(getContext(), ChatActivity.class));
                 break;
             case R.id.mLocationLayout: //定位
-                startActivity(new Intent(getContext(), LocationActivity.class));
+                requestPermissions(Constant.REQUEST_FLAG_LOCATION);
                 break;
             case R.id.mBelongLayout: //归属地查询
                 startActivity(new Intent(getContext(), BelongActivity.class));
@@ -123,23 +123,6 @@ public class AssistantFragment extends BaseFragment {
         }
     }
 
-    //申请相机权限
-    private void requestCameraPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
-                    showPermissionDialog();
-                } else {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
-                }
-            } else {
-                startActivityForResult(new Intent(getContext(), ScanActivity.class), Constant.REQUEST_SCAN_CODE);
-            }
-        } else {
-            startActivityForResult(new Intent(getContext(), ScanActivity.class), Constant.REQUEST_SCAN_CODE);
-        }
-    }
-
     //权限申请的回调处理
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -155,23 +138,51 @@ public class AssistantFragment extends BaseFragment {
         }
     }
 
-    //弹出二维码权限提示Dialog
-    private void showPermissionDialog() {
+    //申请相机权限
+    private void requestPermissions(String flag) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (flag.equals(Constant.REQUEST_FLAG_CAMERA)){
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        showPermissionDialog("相机权限申请","您允许悦享生活使用相机功能吗？",Constant.REQUEST_FLAG_CAMERA);
+                    } else {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
+                    }
+                } else {
+                    startActivityForResult(new Intent(getContext(), ScanActivity.class), Constant.REQUEST_SCAN_CODE);
+                }
+            }else if (flag.equals(Constant.REQUEST_FLAG_LOCATION)){
+
+            }
+        } else {
+            if (flag.equals(Constant.REQUEST_FLAG_CAMERA)){
+                startActivityForResult(new Intent(getContext(), ScanActivity.class), Constant.REQUEST_SCAN_CODE);
+            }else if (flag.equals(Constant.REQUEST_FLAG_LOCATION)){
+
+            }
+        }
+    }
+
+    //弹出权限提示Dialog
+    private void showPermissionDialog(String title, String message, final String flag) {
         new AlertDialog.Builder(getContext())
                 .setPositiveButton("允许", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
+                        if (flag.equals(Constant.REQUEST_FLAG_CAMERA)){
+                            requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
+                        }else if (flag.equals(Constant.REQUEST_FLAG_LOCATION)){
+
+                        }
                     }
                 })
                 .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                    }
+                    public void onClick(DialogInterface dialogInterface, int i) {}
                 })
                 .setCancelable(false)
-                .setTitle("相机权限申请")
-                .setMessage("您允许悦享生活使用相机功能吗？")
+                .setTitle(title)
+                .setMessage(message)
                 .show();
     }
 

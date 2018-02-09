@@ -24,7 +24,3 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class tv.danmaku.ijk.** { *; }
--dontwarn tv.danmaku.ijk.**
--keep class com.shuyu.gsyvideoplayer.** { *; }
--dontwarn com.shuyu.gsyvideoplayer.**
