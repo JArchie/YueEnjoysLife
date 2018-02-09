@@ -7,11 +7,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.widget.LinearLayout;
-
 import com.coder.zzq.smartshow.toast.SmartToast;
 import com.jarchie.common.base.BaseFragment;
 import com.jarchie.common.base.BasePresenter;
@@ -26,7 +24,6 @@ import com.jarchie.yue.ui.activity.LocationActivity;
 import com.jarchie.yue.ui.activity.ScanActivity;
 import com.jarchie.yue.ui.widget.CustomToolBar;
 import com.jarchie.yue.ui.widget.WaveViewByBezier;
-
 import butterknife.Bind;
 import butterknife.OnClick;
 
@@ -114,8 +111,10 @@ public class AssistantFragment extends BaseFragment {
         }
     }
 
+    //二维码扫描结果回传处理
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constant.REQUEST_SCAN_CODE) {
             if (resultCode == Constant.REQUEST_SCAN_OK) {
                 Bundle bundle = data.getExtras();
@@ -131,7 +130,7 @@ public class AssistantFragment extends BaseFragment {
                 if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                     showPermissionDialog();
                 } else {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 1);
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
                 }
             } else {
                 startActivityForResult(new Intent(getContext(), ScanActivity.class), Constant.REQUEST_SCAN_CODE);
@@ -144,6 +143,7 @@ public class AssistantFragment extends BaseFragment {
     //权限申请的回调处理
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case 1:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -155,22 +155,22 @@ public class AssistantFragment extends BaseFragment {
         }
     }
 
-    //弹出Dialog
+    //弹出二维码权限提示Dialog
     private void showPermissionDialog() {
         new AlertDialog.Builder(getContext())
                 .setPositiveButton("允许", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 1);
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
                     }
                 })
                 .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
                     }
                 })
                 .setCancelable(false)
+                .setTitle("相机权限申请")
                 .setMessage("您允许悦享生活使用相机功能吗？")
                 .show();
     }
@@ -194,15 +194,12 @@ public class AssistantFragment extends BaseFragment {
     }
 
     @Override
-    public void showLoading(String title) {
-    }
+    public void showLoading(String title) {}
 
     @Override
-    public void stopLoading() {
-    }
+    public void stopLoading() {}
 
     @Override
-    public void showErrorTip(String msg) {
-    }
+    public void showErrorTip(String msg) {}
 
 }
