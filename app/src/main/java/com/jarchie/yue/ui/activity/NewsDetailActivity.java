@@ -2,7 +2,6 @@ package com.jarchie.yue.ui.activity;
 
 import android.content.Intent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -68,9 +67,6 @@ public class NewsDetailActivity extends BaseActivity implements OnRefreshListene
         mWebView.getSettings().setDomStorageEnabled(true);
         //加载网页的处理逻辑
         mWebView.getSettings().setJavaScriptEnabled(true);
-        //支持缩放
-        mWebView.getSettings().setSupportZoom(true);
-        mWebView.getSettings().setBuiltInZoomControls(true);
         //接口回调
         mWebView.setWebChromeClient(new WebViewClient());
         loadingPage(url);
@@ -114,13 +110,6 @@ public class NewsDetailActivity extends BaseActivity implements OnRefreshListene
                 stopLoading();
             }
         }
-    }
-
-    @Override
-    public void finish() { //防止WebView的ZoomButton引起的内存泄漏
-        ViewGroup viewGroup = (ViewGroup) getWindow().getDecorView();
-        viewGroup.removeAllViews();
-        super.finish();
     }
 
     @Override
