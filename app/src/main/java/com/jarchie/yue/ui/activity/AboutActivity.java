@@ -54,15 +54,16 @@ public class AboutActivity extends BaseActivity {
     public void onClick(TextView view) {
         switch (view.getId()) {
             case R.id.mBlogTv:
-                switchBlog(Constant.BLOG_FLAG);
+                switchBrowser(Constant.BLOG_FLAG);
                 break;
             case R.id.mGithubTv:
-                switchBlog(Constant.GITHUB_FLAG);
+                switchBrowser(Constant.GITHUB_FLAG);
                 break;
         }
     }
 
-    private void switchBlog(String flag) {
+    //调起系统自带浏览器
+    private void switchBrowser(String flag) {
         final Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         if (flag.equals(Constant.BLOG_FLAG)) {
