@@ -1,7 +1,6 @@
 package com.jarchie.yue.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.View;
 
 import com.jarchie.common.base.BaseActivity;
 import com.jarchie.common.base.BasePresenter;
@@ -30,7 +29,12 @@ public class ChatActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        mToolbar.setLeftBtnListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ChatActivity.this.finish();
+            }
+        });
     }
 
     @Override

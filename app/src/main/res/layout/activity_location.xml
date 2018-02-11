@@ -2,11 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <com.jarchie.yue.ui.widget.CustomToolBar
         android:id="@+id/mToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_main"
         android:minHeight="?attr/actionBarSize" />
+
+    <TextView
+        android:id="@+id/mLocText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="@color/color_333"
+        android:textSize="15sp"
+        tools:text="当前位置是：" />
+
+    <com.amap.api.maps2d.MapView
+        android:id="@+id/mMapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp" />
 </LinearLayout>

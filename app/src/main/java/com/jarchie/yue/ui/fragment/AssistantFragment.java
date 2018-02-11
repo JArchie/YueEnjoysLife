@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.widget.LinearLayout;
+
 import com.coder.zzq.smartshow.toast.SmartToast;
 import com.jarchie.common.base.BaseFragment;
 import com.jarchie.common.base.BasePresenter;
@@ -18,12 +19,13 @@ import com.jarchie.yue.R;
 import com.jarchie.yue.constant.Constant;
 import com.jarchie.yue.ui.activity.AboutActivity;
 import com.jarchie.yue.ui.activity.BelongActivity;
-import com.jarchie.yue.ui.activity.ChatActivity;
+//import com.jarchie.yue.ui.activity.ChatActivity;
 import com.jarchie.yue.ui.activity.CourierActivity;
 import com.jarchie.yue.ui.activity.LocationActivity;
 import com.jarchie.yue.ui.activity.ScanActivity;
 import com.jarchie.yue.ui.widget.CustomToolBar;
 import com.jarchie.yue.ui.widget.WaveViewByBezier;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 
@@ -44,8 +46,8 @@ public class AssistantFragment extends BaseFragment {
     WaveViewByBezier waveViewByBezier;
     @Bind(R.id.mScanLayout)
     LinearLayout mScanLayout;
-    @Bind(R.id.mChatLayout)
-    LinearLayout mChatLayout;
+//    @Bind(R.id.mChatLayout)
+//    LinearLayout mChatLayout;
     @Bind(R.id.mLocationLayout)
     LinearLayout mLocationLayout;
     @Bind(R.id.mBelongLayout)
@@ -87,15 +89,16 @@ public class AssistantFragment extends BaseFragment {
         return null;
     }
 
-    @OnClick({R.id.mScanLayout, R.id.mChatLayout, R.id.mLocationLayout, R.id.mBelongLayout, R.id.mCourierLayout, R.id.mAboutLayout})
+    // R.id.mChatLayout,
+    @OnClick({R.id.mScanLayout, R.id.mLocationLayout, R.id.mBelongLayout, R.id.mCourierLayout, R.id.mAboutLayout})
     public void onClick(LinearLayout layout) {
         switch (layout.getId()) {
             case R.id.mScanLayout: //扫一扫
                 requestPermissions(Constant.REQUEST_FLAG_CAMERA);
                 break;
-            case R.id.mChatLayout: //聊一聊
-                startActivity(new Intent(getContext(), ChatActivity.class));
-                break;
+//            case R.id.mChatLayout: //聊一聊
+//                startActivity(new Intent(getContext(), ChatActivity.class));
+//                break;
             case R.id.mLocationLayout: //定位
                 requestPermissions(Constant.REQUEST_FLAG_LOCATION);
                 break;
@@ -135,30 +138,45 @@ public class AssistantFragment extends BaseFragment {
                     SmartToast.showLongInCenter("您拒绝了此权限！使用此功能需要允许使用该权限！");
                 }
                 break;
+            case 2:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startActivity(new Intent(getContext(), LocationActivity.class));
+                } else {
+                    SmartToast.showLongInCenter("您拒绝了此权限！使用此功能需要允许使用该权限！");
+                }
+                break;
         }
     }
 
     //申请相机权限
     private void requestPermissions(String flag) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (flag.equals(Constant.REQUEST_FLAG_CAMERA)){
+            if (flag.equals(Constant.REQUEST_FLAG_CAMERA)) {
                 if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
-                        showPermissionDialog("相机权限申请","您允许悦享生活使用相机功能吗？",Constant.REQUEST_FLAG_CAMERA);
+                        showPermissionDialog("相机权限申请", "您允许悦享生活使用相机功能吗？", Constant.REQUEST_FLAG_CAMERA);
                     } else {
                         requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
                     }
                 } else {
                     startActivityForResult(new Intent(getContext(), ScanActivity.class), Constant.REQUEST_SCAN_CODE);
                 }
-            }else if (flag.equals(Constant.REQUEST_FLAG_LOCATION)){
-
+            } else if (flag.equals(Constant.REQUEST_FLAG_LOCATION)) {
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                        showPermissionDialog("定位权限申请", "您允许悦享生活获取您的位置信息吗？", Constant.REQUEST_FLAG_LOCATION);
+                    } else {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
+                    }
+                } else {
+                    startActivity(new Intent(getContext(), LocationActivity.class));
+                }
             }
         } else {
-            if (flag.equals(Constant.REQUEST_FLAG_CAMERA)){
+            if (flag.equals(Constant.REQUEST_FLAG_CAMERA)) {
                 startActivityForResult(new Intent(getContext(), ScanActivity.class), Constant.REQUEST_SCAN_CODE);
-            }else if (flag.equals(Constant.REQUEST_FLAG_LOCATION)){
-
+            } else if (flag.equals(Constant.REQUEST_FLAG_LOCATION)) {
+                startActivity(new Intent(getContext(), LocationActivity.class));
             }
         }
     }
@@ -169,16 +187,17 @@ public class AssistantFragment extends BaseFragment {
                 .setPositiveButton("允许", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (flag.equals(Constant.REQUEST_FLAG_CAMERA)){
+                        if (flag.equals(Constant.REQUEST_FLAG_CAMERA)) {
                             requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
-                        }else if (flag.equals(Constant.REQUEST_FLAG_LOCATION)){
-
+                        } else if (flag.equals(Constant.REQUEST_FLAG_LOCATION)) {
+                            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
                         }
                     }
                 })
                 .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {}
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
                 })
                 .setCancelable(false)
                 .setTitle(title)
@@ -206,10 +225,8 @@ public class AssistantFragment extends BaseFragment {
 
     @Override
     public void showLoading(String title) {}
-
     @Override
     public void stopLoading() {}
-
     @Override
     public void showErrorTip(String msg) {}
 

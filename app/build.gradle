@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -17,9 +18,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
+    }
 }
 
 dependencies {
     compile project(':common')
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile files('libs/AMap_Location_V3.8.0_20180201.jar')
+    compile files('libs/Amap_2DMap_V5.2.0_20170627.jar')
 }

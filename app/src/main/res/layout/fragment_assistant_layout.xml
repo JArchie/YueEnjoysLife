@@ -98,7 +98,7 @@
             </LinearLayout>
 
             <!--聊一聊-->
-            <LinearLayout
+            <!--<LinearLayout
                 android:id="@+id/mChatLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
                     android:layout_gravity="right"
                     android:layout_marginRight="10dp"
                     android:src="@drawable/arrow_right" />
-            </LinearLayout>
+            </LinearLayout>-->
 
             <!--我的位置-->
             <LinearLayout
