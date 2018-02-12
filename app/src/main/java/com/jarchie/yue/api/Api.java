@@ -47,7 +47,7 @@ public class Api{
         apiService = retrofit.create(ApiService.class);
     }
 
-    //NETEASE_NEWS_VIDEO：1（新闻，视频），GANK_GIRL_PHOTO：2（图片新闻），EWS_DETAIL_HTML_PHOTO:3新闻详情html图片)
+    //域名地址
     public static ApiService getDefault(int hostType) {
         Api retrofitManager = mRetrofitManager.get(hostType);
         if (retrofitManager == null) {
