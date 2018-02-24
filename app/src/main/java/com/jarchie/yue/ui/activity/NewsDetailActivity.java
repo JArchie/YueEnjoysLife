@@ -63,8 +63,8 @@ public class NewsDetailActivity extends BaseActivity implements OnRefreshListene
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
         mToolbar.setTitle("新闻详情");
-//        mToolbar.showSearch();
-//        mToolbar.setRightBtnIcon(getResources().getDrawable(R.drawable.share));
+        mToolbar.showSearch();
+        mToolbar.setRightBtnIcon(getResources().getDrawable(R.drawable.share));
         RefreshInitView.initDataView(mRefreshLayout, this);
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         mWebView.getSettings().setDomStorageEnabled(true);
